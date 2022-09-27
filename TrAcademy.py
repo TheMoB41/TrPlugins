@@ -8,7 +8,7 @@ import os
 import subprocess
 
 pName = 'TrAcademy'
-pVersion = '1.0.1'
+pVersion = '1.0.2'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrAcademy'
 # KULLANICI AYARLARI
 SIRA_VARSAYILAN_NUMARA = 1 
