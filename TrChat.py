@@ -7,7 +7,7 @@ import os
 
 pName = 'TrChat'
 pVersion = '1.0.0'
-pUrl = "https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrChat"
+pUrl = "https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrChat.py"
 # ______________________________ KURULUM ______________________________ #
 # KURESELLER
 MESSAGES_DELAY = 10000
