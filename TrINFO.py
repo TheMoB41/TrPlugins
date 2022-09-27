@@ -9,7 +9,7 @@ import subprocess
 
 pVersion = '1.0.4'
 pName = 'TrINFO'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrInfo'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrINFO.py'
 
 #GUI YAPILANDIRMASI
 gui = QtBind.init(__name__,pName)
