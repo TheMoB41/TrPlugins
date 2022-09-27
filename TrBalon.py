@@ -4,7 +4,7 @@ import struct
 
 pName = 'TrBalon'
 pVersion = '1.0.0'
-pUrl = ''
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrBalon.py'
 INFLATE_BALLOON_LEVEL_STOP = 6
 INFLATE_BALLOON_LEVELUP_DELAY = 4.0 # seconds
 
