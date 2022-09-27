@@ -7,7 +7,7 @@ import shutil
 
 pName = 'TrUpdater'
 pVersion = '1.0.0'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrUpdater'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrUpdater.py'
 
 # ______________________________ YUKLEME ______________________________ #
 # KULLANICI ARAYUZU
