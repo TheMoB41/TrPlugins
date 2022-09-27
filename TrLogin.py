@@ -8,7 +8,7 @@ from threading import Timer
 
 pName = 'TrLogin'
 pVersion = '0.0.1'
-pUrl = ''
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrLogin.py'
 timerCheck = None
 character_data = None
 gui = QtBind.init(__name__,pName)
