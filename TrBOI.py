@@ -7,7 +7,7 @@ import os
 
 pName = 'TrBOI'
 pVersion = '1.0.0'
-pUrl = ''
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrBOI.py'
 path = get_config_dir()+pName+"\\"
 
 Online = False
