@@ -10,7 +10,7 @@ import os
 
 pName = 'TrKonsinye'
 pVersion = '1.0.0'
-pUrl = ''
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrKonsinye.py'
 
 path = get_config_dir()[:-7]
 
