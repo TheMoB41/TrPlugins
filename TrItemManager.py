@@ -10,7 +10,7 @@ import subprocess
 
 pVersion = '1.0.0'
 pName = 'TrItemManager'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrItemManager'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrItemManager.py'
 
 # KURESELLER
 character_data = None
