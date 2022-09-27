@@ -9,7 +9,7 @@ import os
 
 pVersion = '1.0.1'
 pName = 'TrDungeon'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrDungeon'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrDungeon.py'
 
 # ______________________________ KURULUM ______________________________ #
 DIMENSIONAL_COOLDOWN_DELAY = 18000 # SANIYE (2 SAAT)
