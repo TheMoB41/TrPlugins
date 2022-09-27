@@ -11,7 +11,7 @@ import subprocess
 
 pName = 'TrLockeR'
 pVersion = '1.0.1'
-pUrl = "https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrLockeR"
+pUrl = "https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrLockeR.py"
 gui = QtBind.init(__name__,pName)
 lblPlugins2 = QtBind.createLabel(gui,"TrLockeR:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.",11,31)
 _x = 20
