@@ -39,7 +39,7 @@ store_take_gold_guild_storage_amount_widget_default = '0'
 
 pVersion = '1.0.0'
 pName = 'TrItemStack'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrItemStack'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrItemStack.py'
 
 gui = QtBind.init(__name__, pName)
 
