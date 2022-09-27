@@ -15,7 +15,7 @@ import subprocess
 
 pName = 'TrController'
 pVersion = '1.0.2'
-pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrController'
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
 path = get_config_dir()[:-7]
