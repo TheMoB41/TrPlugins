@@ -5,7 +5,7 @@ import os
 
 pName = 'TrPacketTooL'
 pVersion = '1.0.0'
-pUrl = "https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrPacketTool"
+pUrl = "https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrPacketTool.py"
 # ______________________________ KURULUM ______________________________ #
 # KULLANICI ARAYUZU
 gui = QtBind.init(__name__,pName)
