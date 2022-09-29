@@ -14,7 +14,7 @@ import signal
 import subprocess
 
 pName = 'TrController'
-pVersion = '1.0.2'
+pVersion = '1.0.3'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
@@ -194,6 +194,7 @@ def handleChatCommand(msg):
 		sent = phBotChat.Global(args[1])
 	if sent:
 		log('Plugin: MESAJ "'+t+'" GONDERILDI.')
+
 # MAX RADIUSTA LOKASYON BELIRLEME
 def randomMovement(radiusMax=10):
 	# KARISIK POZIYON BELIRLEME
@@ -243,6 +244,7 @@ def stop_follow():
 	followPlayer = ""
 	followDistance = 0
 	return result
+
 # PET ACTIRMAK
 def MountHorse():
 	item = GetItemByExpression(lambda n,s: s.startswith('ITEM_COS_C_'),13)
@@ -522,7 +524,7 @@ def handle_chat(t,player,msg):
 		elif msg == 'KORAL':
 			# MEVCUT POZISYONU KONTROL ET
 			pos = get_position()
-			phBotChat.Private(player,'My position is (X:%.1f,Y:%.1f,Z:%1f,Region:%d)'%(pos['x'],pos['y'],pos['z'],pos['region']))
+			phBotChat.Private(player,'CHARIN POZİSYONU : (X:%.1f,Y:%.1f,Z:%1f,Region:%d)'%(pos['x'],pos['y'],pos['z'],pos['region']))
 		elif msg.startswith("RANGE"):
 			# BOSLUK SILMEK ICIN
 			msg = msg.rstrip()
@@ -650,11 +652,11 @@ def handle_chat(t,player,msg):
 				except:
 					log("Plugin: MAKSIMUM RADIUS YANLIS !")
 		elif msg.startswith("FOLLOW"):
-			# VARSAYILAN VERILER
+			# default values
 			charName = player
 			distance = 10
 			if msg != "FOLLOW":
-				# PARAMETRE KONTROLU
+				# Check params
 				msg = msg[6:].split()
 				try:
 					if len(msg) >= 1:
@@ -662,14 +664,14 @@ def handle_chat(t,player,msg):
 					if len(msg) >= 2:
 						distance = float(msg[1])
 				except:
-					log("Plugin: TAKIP MESAFESI YANLIS !")
+					log("Plugin: TAKİP MESAFESİ YANLIŞ !")
 					return
-			# TAKIP BASLATMA
-			if start_follow(charName,distance):
-				log("Plugin: TAKIP ["+charName+"] ISIMLI KISIYE ["+str(distance)+"] MESAFEDEN TAKIP BASLATILDI.")
+			# Start following
+			if start_follow(charName, distance):
+				log("Plugin: BU KİŞİ TAKİP EDİLİYOR : [" + charName + "] MESAFE : [" + str(distance) + "] ")
 		elif msg == "NOFOLLOW":
 			if stop_follow():
-				log("Plugin: TAKIP DURDURULDU.")
+				log("Plugin: TAKİP DURDURULDU..")
 		elif msg.startswith("PROFIL"):
 			if msg == "PROFIL":
 				if set_profile('Default'):
@@ -775,30 +777,69 @@ def handle_chat(t,player,msg):
 		elif msg == "MERHABA":
 			log("Plugin: MERHABA CINIM ")
 			inject_joymax( 0x3091,b'\x00',False)
-# 500MS DE BIR KONTROL ETTIRME
-def event_loop():
-	if inGame and followActivated:
-		player = near_party_player(followPlayer)
-		# YANINDA MI
-		if not player:
-			return
-		# MESAFE KONTROLU
-		if followDistance > 0:
-			p = get_position()
-			playerDistance = round(GetDistance(p['x'],p['y'],player['x'],player['y']),2)
-			# HAREKET ALGILAMA
-			if followDistance < playerDistance:
-				# X Y BELIRLEME
-				x_unit = (player['x'] - p['x']) / playerDistance
-				y_unit = (player['y'] - p['y']) / playerDistance
-				# MESEFAYE YURUME
-				movementDistance = playerDistance-followDistance
-				log("TAKIPTE : "+followPlayer+"...")
-				move_to(movementDistance * x_unit + p['x'],movementDistance * y_unit + p['y'],0)
-		else:
-			# NEGATIF NUMARALARI GORMEZDEN GEL
-			log("TAKIPTE : "+followPlayer+"...")
-			move_to(player['x'],player['y'],0)
+		elif msg == "H11":
+			log("Plugin: HOTAN FORTRESS 1>1")
+			inject_joymax( 0x705A,b'\x02\x00\x00\x00\x02\x99\x00\x00\x00\x02\x00\x00\x00',False)
+		elif msg == "H12":
+			log("Plugin: HOTAN FORTRESS 1>2")
+			inject_joymax( 0x705A,b'\x02\x00\x00\x00\x02\x9A\x00\x00\x00\x02\x00\x00\x00',False)
+		elif msg == "H13":
+			log("Plugin: HOTAN FORTRESS 1>3")
+			inject_joymax( 0x705A,b'\x02\x00\x00\x00\x02\x9B\x00\x00\x00\x02\x00\x00\x00',False)
+		elif msg == "H14":
+			log("Plugin: HOTAN FORTRESS 1>4")
+			inject_joymax( 0x705A,b'\x02\x00\x00\x00\x02\x9C\x00\x00\x00\x02\x00\x00\x00',False)
+		elif msg == "H21":
+			log("Plugin: HOTAN FORTRESS 2>1")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\x99\x00\x00\x00\x03\x00\x00\x00',False)
+		elif msg == "H22":
+			log("Plugin: HOTAN FORTRESS 2>2")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\x9A\x00\x00\x00\x03\x00\x00\x00',False)
+		elif msg == "H23":
+			log("Plugin: HOTAN FORTRESS 2>3")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\x9B\x00\x00\x00\x03\x00\x00\x00',False)
+		elif msg == "H24":
+			log("Plugin: HOTAN FORTRESS 2>4")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\x9C\x00\x00\x00\x03\x00\x00\x00',False)
+		elif msg == "H31":
+			log("Plugin: HOTAN FORTRESS 3>1")
+			inject_joymax( 0x705A,b'\x04\x00\x00\x00\x02\x99\x00\x00\x00\x04\x00\x00\x00',False)
+		elif msg == "H32":
+			log("Plugin: HOTAN FORTRESS 3>2")
+			inject_joymax( 0x705A,b'\x04\x00\x00\x00\x02\x9A\x00\x00\x00\x04\x00\x00\x00',False)
+		elif msg == "H33":
+			log("Plugin: HOTAN FORTRESS 3>3")
+			inject_joymax( 0x705A,b'\x04\x00\x00\x00\x02\x9B\x00\x00\x00\x04\x00\x00\x00',False)
+		elif msg == "H34":
+			log("Plugin: HOTAN FORTRESS 3>4")
+			inject_joymax( 0x705A,b'\x04\x00\x00\x00\x02\x9C\x00\x00\x00\x04\x00\x00\x00',False)
+		elif msg == "J11":
+			log("Plugin: JANGAN FORTRESS 1>1")
+			inject_joymax( 0x705A,b'\x08\x00\x00\x00\x02\x31\x00\x00\x00',False)
+		elif msg == "J12":
+			log("Plugin: JANGAN FORTRESS 1>2")
+			inject_joymax( 0x705A,b'\x08\x00\x00\x00\x02\x32\x00\x00\x00',False)
+		elif msg == "J13":
+			log("Plugin: JANGAN FORTRESS 1>3")
+			inject_joymax( 0x705A,b'\x08\x00\x00\x00\x02\x33\x00\x00\x00',False)
+		elif msg == "J21":
+			log("Plugin: JANGAN FORTRESS 2>1")
+			inject_joymax( 0x705A,b'\x09\x00\x00\x00\x02\x31\x00\x00\x00',False)
+		elif msg == "J22":
+			log("Plugin: JANGAN FORTRESS 2>2")
+			inject_joymax( 0x705A,b'\x09\x00\x00\x00\x02\x32\x00\x00\x00',False)
+		elif msg == "J23":
+			log("Plugin: JANGAN FORTRESS 2>3")
+			inject_joymax( 0x705A,b'\x09\x00\x00\x00\x02\x33\x00\x00\x00',False)
+		elif msg == "J31":
+			log("Plugin: JANGAN FORTRESS 3>1")
+			inject_joymax( 0x705A,b'\x0A\x00\x00\x00\x02\x31\x00\x00\x00',False)
+		elif msg == "J32":
+			log("Plugin: JANGAN FORTRESS 3>2")
+			inject_joymax( 0x705A,b'\x0A\x00\x00\x00\x02\x32\x00\x00\x00',False)
+		elif msg == "J33":
+			log("Plugin: JANGAN FORTRESS 3>3")
+			inject_joymax( 0x705A,b'\x0A\x00\x00\x00\x02\x33\x00\x00\x00',False)
 # YEDEK
 def ResetSkip():
 	global SkipCommand
@@ -988,6 +1029,28 @@ def event_loop():
 			if CurrentTime == CloseBotAt:
 				CheckCloseTime = False
 				Terminate()
+	if inGame and followActivated:
+		player = near_party_player(followPlayer)
+		# check if is near
+		if not player:
+			return
+		# check distance to the player
+		if followDistance > 0:
+			p = get_position()
+			playerDistance = round(GetDistance(p['x'],p['y'],player['x'],player['y']),2)
+			# check if has to move
+			if followDistance < playerDistance:
+				# generate vector unit
+				x_unit = (player['x'] - p['x']) / playerDistance
+				y_unit = (player['y'] - p['y']) / playerDistance
+				# distance to move
+				movementDistance = playerDistance-followDistance
+				log("Following "+followPlayer+"...")
+				move_to(movementDistance * x_unit + p['x'],movementDistance * y_unit + p['y'],0)
+		else:
+			# Avoid negative numbers
+			log("TAKİP EDİLİYOR : "+followPlayer+"...")
+			move_to(player['x'],player['y'],0)
 
 def button_start():
 	global BtnStart, RecordedPackets
