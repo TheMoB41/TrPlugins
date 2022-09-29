@@ -15,7 +15,7 @@ import subprocess
 
 pName = 'TrFortressController'
 pVersion = '1.0.0'
-pUrl = ''
+pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrFortressController.py'
 
 # KURULUM
 path = get_config_dir()[:-7]
