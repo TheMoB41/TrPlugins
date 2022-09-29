@@ -7,7 +7,7 @@ import json
 import os
 import subprocess
 
-pVersion = '1.0.5'
+pVersion = '1.0.6'
 pName = 'TrINFO'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrINFO.py'
 
@@ -16,11 +16,10 @@ gui = QtBind.init(__name__,pName)
 QtBind.createList(gui,500,40,90,180)
 btnTrController = QtBind.createButton(gui,'btnTrController_clicked',"    TrController    ",505,45)
 btnUTrChat = QtBind.createButton(gui,'btnTrChat_clicked',"        TrChat        ",505,70)
-btnTrLocker = QtBind.createButton(gui,'btnTrLocker_clicked',"       TrLockeR     ",505,95)
+btnTrUpdater = QtBind.createButton(gui,'btnTrUpdater_clicked',"     TrUpdater    ",505,95)
 btnTrPacketTool = QtBind.createButton(gui,'btnTrPacketTool_clicked',"   TrPacketTooL  ",505,120)
 btnTrDungeon = QtBind.createButton(gui,'btnTrDungeon_clicked',"     TrDungeon    ",505,145)
 btnTrItemManager = QtBind.createButton(gui,'btnTrItemManager_clicked'," TrItemManager ",505,170)
-btnTrUpdater = QtBind.createButton(gui,'btnTrUpdater_clicked',"     TrUpdater    ",505,195)
 QtBind.createList(gui,605,40,90,180)
 btnTrAcademy = QtBind.createButton(gui,'btnTrAcademy_clicked',"     TrAcademy    ",610,45)
 btnTrItemStack = QtBind.createButton(gui,'btnTrItemStack_clicked',"    TrItemStack    ",610,70)
@@ -44,9 +43,6 @@ def btnTrController_clicked():
 def btnTrChat_clicked():
 	QtBind.clear(gui,lstInfo)
 	QtBind.append(gui,lstInfo,'TrChat:\n   # BU PLUGIN ILE 10 SANIYEDE BIR SPAM MESAJ ATILABILIR, SECILEN KOSULA GORE\nISTEDIGINIZ CHAT EKRANINA MESAJ GONDEREBILIRSINIZ.\n   # BUNA EK OLARAK SCRIPTE EKLEYECEGINIZ BASIT BIR KODLA SCRIPT ESNASINDA\nOTO MESAJ ATTIRABILIRSINIZ..\n   # ORNEK: "chat,all,SELAM" VEYA "chat,private,TheMoB,SELAM"')
-def btnTrLocker_clicked():
-	QtBind.clear(gui,lstInfo)
-	QtBind.append(gui,lstInfo,'TrLockeR:\n    # BU PLUGIN AKADEMI VE PARTI LISTELERINDEN OTOMATIK GIRIS YAPARKEN\nISTENMEYEN KISILERIN GIRMESINI ENGELLEMEK ICIN TASARLANMISTIR.\n    # BIR NEVI SIFRELEME SISTEMI OLUP, MASTER CHARIN BELIRLENEN SORUYU\nSORMASININ ARDINDAN GIRIS YAPAN CHARIN DOGRU CEVABI VERMESIYLE CALISIR.\n    # KURULUM :\n - PARTI MASTER: PARTY MASTERI OLACAK CHARIN ADI.\n - AKADEMI MASTER: AKADEMI MASTERI OLACAK CHARIN ADI.\n - SORU: CHAT EKRANINDA SORDURMAK ISTEDIGIN SORU.\n - CEVAP: SORULAN SORUYA VERILMESINI ISTEDIGIN YANIT.\n(SIFRE NITELIGINDE OLUP BASKA BIR KISI ILE PAYLASMAYIN.)')
 def btnTrPacketTool_clicked():
 	QtBind.clear(gui,lstInfo)
 	QtBind.append(gui,lstInfo,'TrPacketTooL:\n    # BU PLUGIN CLIENTTEN SERVERA GONDERILEN OPCODE PAKETLERINI VEYA\nSERVERDAN CLIENTE GELEN OPCODE PAKETLERINI GOSTERMEKTEDIR.\n    # EK OLARAK CLIENTTEN SERVERA OPCODE ENEJEKTE EDEBILIR VE CEVRENIZDEKI\nNPCLERIN DATALARINA ULASABILIRSINIZ.')
