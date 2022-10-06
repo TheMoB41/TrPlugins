@@ -14,7 +14,7 @@ import signal
 import subprocess
 
 pName = 'TrController'
-pVersion = '1.0.4'
+pVersion = '1.0.5'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
@@ -125,6 +125,9 @@ def cbxGOAll_clicked(checked):
 		data['GOMessageAll']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
+	QtBind.setChecked(gui, cbxGOParty, False)
+	QtBind.setChecked(gui, cbxGOGuild, False)
+	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOParty_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -140,6 +143,9 @@ def cbxGOParty_clicked(checked):
 		data['GOMessageParty']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
+	QtBind.setChecked(gui, cbxGOAll, False)
+	QtBind.setChecked(gui, cbxGOGuild, False)
+	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOGuild_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -155,6 +161,9 @@ def cbxGOGuild_clicked(checked):
 		data['GOMessageGuild']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
+	QtBind.setChecked(gui, cbxGOParty, False)
+	QtBind.setChecked(gui, cbxGOAll, False)
+	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOUnion_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -170,6 +179,9 @@ def cbxGOUnion_clicked(checked):
 		data['GOMessageUnion']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
+	QtBind.setChecked(gui, cbxGOParty, False)
+	QtBind.setChecked(gui, cbxGOGuild, False)
+	QtBind.setChecked(gui, cbxGOAll, False)
 def ListContains(text,lst):
 	text = text.lower()
 	for i in range(len(lst)):
