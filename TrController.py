@@ -14,7 +14,7 @@ import signal
 import subprocess
 
 pName = 'TrController'
-pVersion = '1.0.3'
+pVersion = '1.0.4'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
@@ -37,7 +37,7 @@ followPlayer = ''
 followDistance = 0
 #GUI
 gui = QtBind.init(__name__,pName)
-lblxControl01 = QtBind.createLabel(gui,'TrController:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ. \n\n * KOMUT DETAYLARI ICIN "TrINFO" PLUGININE GOZ ATABILIRSINIZ..',320,150)
+lblxControl01 = QtBind.createLabel(gui,'TrController:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ. \n\n * KOMUT DETAYLARI ICIN "TrINFO" PLUGININE GOZ ATABILIRSINIZ..',350,235)
 tbxLeaders = QtBind.createLineEdit(gui,"",430,11,100,20)
 lstLeaders = QtBind.createList(gui,430,32,176,48)
 btnAddLeader = QtBind.createButton(gui,'btnAddLeader_clicked',"LIDER EKLE",535,10)
@@ -50,10 +50,16 @@ ShowCommandsBtn = QtBind.createButton(gui, 'button_ShowCmds', ' MEVCUT KAYITLI \
 DeleteCommandsBtn = QtBind.createButton(gui, 'button_DelCmds', ' CMD SİL ', 145, 240)
 ShowPacketsBtn = QtBind.createButton(gui, 'button_ShowPackets', ' PAKETLERİ GÖSTER ', 220, 240)
 cbxShowPackets = QtBind.createCheckBox(gui, 'cbxAuto_clicked','PAKETLERİ GÖSTER ', 220, 265)
-QtBind.createLabel(gui,'OTO TARGET : ',615,85)
-QtBind.createList(gui,615,100,105,45)
-cbxEnabled = QtBind.createCheckBox(gui,'cbxDoNothing','ETKİNLEŞTİR',620,105)
-cbxDefensive = QtBind.createCheckBox(gui,'cbxDoNothing','DEFANSIF MOD',620,125)
+QtBind.createLabel(gui,'OTO TARGET : ',525,120)
+QtBind.createList(gui,525,140,105,45)
+cbxEnabled = QtBind.createCheckBox(gui,'cbxDoNothing','ETKİNLEŞTİR',530,145)
+cbxDefensive = QtBind.createCheckBox(gui,'cbxDoNothing','DEFANSIF MOD',530,160)
+QtBind.createLabel(gui,'GO MESAJ KOMUTLARI : ',345,120)
+QtBind.createList(gui,345,140,170,70)
+cbxGOAll = QtBind.createCheckBox(gui,"cbxGOAll_clicked","GO ALL MESAJ AKTİF ET !",350,145)
+cbxGOParty = QtBind.createCheckBox(gui,"cbxGOParty_clicked","GO PARTY MESAJ AKTİF ET !",350,160)
+cbxGOGuild = QtBind.createCheckBox(gui,"cbxGOGuild_clicked","GO GUILD MESAJ AKTİF ET !",350,175)
+cbxGOUnion = QtBind.createCheckBox(gui,"cbxGOUnion_clicked","GO UNION MESAJ AKTİF ET !",350,190)
 # ______________________________METHODLAR ______________________________ #
 # TRController CONFIG YOLU
 def getPath():
@@ -73,6 +79,10 @@ def loadDefaultConfig():
 	QtBind.clear(gui,lstLeaders)
 	QtBind.setChecked(gui, cbxEnabled, False)
 	QtBind.setChecked(gui, cbxDefensive, False)
+	QtBind.setChecked(gui, cbxGOAll, False)
+	QtBind.setChecked(gui, cbxGOParty, False)
+	QtBind.setChecked(gui, cbxGOGuild, False)
+	QtBind.setChecked(gui, cbxGOUnion, False)
 # ONCEKI KAYITLI TUM CONFIGLERI YUKLEME
 def loadConfigs():
 	loadDefaultConfig()
@@ -88,6 +98,78 @@ def loadConfigs():
 				QtBind.setChecked(gui, cbxDefensive, True)
 			if "Target" in data and data['Target']:
 				QtBind.setChecked(gui, cbxEnabled, True)
+			if "GOMessageAll" in data:
+				if data["GOMessageAll"] == "True":
+					QtBind.setChecked(gui, cbxGOAll, True)
+			if "GOMessageParty" in data:
+				if data["GOMessageParty"] == "True":
+					QtBind.setChecked(gui, cbxGOParty, True)
+			if "GOMessageGuild" in data:
+				if data["GOMessageGuild"] == "True":
+					QtBind.setChecked(gui, cbxGOGuild, True)
+			if "GOMessageUnion" in data:
+				if data["GOMessageUnion"] == "True":
+					QtBind.setChecked(gui, cbxGOUnion, True)
+def cbxGOAll_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOMessageAll" in data:
+			data['GOMessageAll'] = []
+		check = QtBind.isChecked(gui,cbxGOAll)
+		data['GOMessageAll']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOParty_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOMessageParty" in data:
+			data['GOMessageParty'] = []
+		check = QtBind.isChecked(gui,cbxGOParty)
+		data['GOMessageParty']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOGuild_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOMessageGuild" in data:
+			data['GOMessageGuild'] = []
+		check = QtBind.isChecked(gui,cbxGOGuild)
+		data['GOMessageGuild']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOUnion_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOMessageUnion" in data:
+			data['GOMessageUnion'] = []
+		check = QtBind.isChecked(gui,cbxGOUnion)
+		data['GOMessageUnion']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
 def ListContains(text,lst):
 	text = text.lower()
 	for i in range(len(lst)):
@@ -485,6 +567,19 @@ def handle_chat(t,player,msg):
 		if msg == "BASLAT":
 			start_bot()
 			log("Plugin: BOT BASLATILDI.")
+		elif msg.startswith("GO"):
+			msgData = msg[3:].split()
+			data = bytearray()
+			data.append(int(msgData[0], 16))
+			data.append(int(msgData[1], 16))
+			data.append(int(msgData[2], 16))
+			data.append(int(msgData[3], 16))
+			data.append(int(msgData[4], 16))
+			data.append(int(msgData[5], 16))
+			data.append(int(msgData[6], 16))
+			data.append(int(msgData[7], 16))
+			data.append(int(msgData[8], 16))
+			inject_joymax(0x705A, data, False)
 		elif msg == "DURDUR":
 			stop_bot()
 			log("Plugin: BOT DURDURULDU")
@@ -1182,7 +1277,24 @@ def handle_silkroad(opcode, data):
 				if QtBind.isChecked(gui, cbxShowPackets):
 					log("Plugin: KAYIT EDİLDİ.. (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) " + (
 						"None" if not data else ' '.join('{:02X}'.format(x) for x in data)))
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOAll):
+		phBotChat.All('GO ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOParty):
+		phBotChat.Party('GO ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOGuild):
+		phBotChat.Guild('GO ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOUnion):
+		phBotChat.Union('GO ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
 	return True
+
 def handle_joymax(opcode, data):
 	if opcode == 0xB070 and QtBind.isChecked(gui,cbxEnabled):
 		if data[0] == 1:
