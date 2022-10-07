@@ -14,7 +14,7 @@ import signal
 import subprocess
 
 pName = 'TrController'
-pVersion = '1.0.5'
+pVersion = '1.0.6'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
@@ -38,10 +38,10 @@ followDistance = 0
 #GUI
 gui = QtBind.init(__name__,pName)
 lblxControl01 = QtBind.createLabel(gui,'TrController:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ. \n\n * KOMUT DETAYLARI ICIN "TrINFO" PLUGININE GOZ ATABILIRSINIZ..',350,235)
-tbxLeaders = QtBind.createLineEdit(gui,"",430,11,100,20)
-lstLeaders = QtBind.createList(gui,430,32,176,48)
-btnAddLeader = QtBind.createButton(gui,'btnAddLeader_clicked',"LIDER EKLE",535,10)
-btnRemLeader = QtBind.createButton(gui,'btnRemLeader_clicked',"LIDER SIL",440,85)
+tbxLeaders = QtBind.createLineEdit(gui,"",550,11,100,20)
+lstLeaders = QtBind.createList(gui,550,32,140,48)
+btnAddLeader = QtBind.createButton(gui,'btnAddLeader_clicked',"LIDER EKLE",655,10)
+btnRemLeader = QtBind.createButton(gui,'btnRemLeader_clicked',"LIDER SIL",560,85)
 LvlSaveName = QtBind.createLabel(gui,'CMD KAYIT İSMİ : ',10,13)
 SaveName = QtBind.createLineEdit(gui,"",95,10,120,20)
 RecordBtn = QtBind.createButton(gui, 'button_start', ' KAYIT BAŞLAT ', 220, 10)
@@ -50,16 +50,22 @@ ShowCommandsBtn = QtBind.createButton(gui, 'button_ShowCmds', ' MEVCUT KAYITLI \
 DeleteCommandsBtn = QtBind.createButton(gui, 'button_DelCmds', ' CMD SİL ', 145, 240)
 ShowPacketsBtn = QtBind.createButton(gui, 'button_ShowPackets', ' PAKETLERİ GÖSTER ', 220, 240)
 cbxShowPackets = QtBind.createCheckBox(gui, 'cbxAuto_clicked','PAKETLERİ GÖSTER ', 220, 265)
-QtBind.createLabel(gui,'OTO TARGET : ',525,120)
-QtBind.createList(gui,525,140,105,45)
-cbxEnabled = QtBind.createCheckBox(gui,'cbxDoNothing','ETKİNLEŞTİR',530,145)
-cbxDefensive = QtBind.createCheckBox(gui,'cbxDoNothing','DEFANSIF MOD',530,160)
+QtBind.createLabel(gui,'OTO TARGET : ',340,10)
+QtBind.createList(gui,340,25,105,45)
+cbxEnabled = QtBind.createCheckBox(gui,'cbxDoNothing','ETKİNLEŞTİR',345,30)
+cbxDefensive = QtBind.createCheckBox(gui,'cbxDoNothing','DEFANSIF MOD',345,45)
 QtBind.createLabel(gui,'GO MESAJ KOMUTLARI : ',345,120)
 QtBind.createList(gui,345,140,170,70)
 cbxGOAll = QtBind.createCheckBox(gui,"cbxGOAll_clicked","GO ALL MESAJ AKTİF ET !",350,145)
 cbxGOParty = QtBind.createCheckBox(gui,"cbxGOParty_clicked","GO PARTY MESAJ AKTİF ET !",350,160)
 cbxGOGuild = QtBind.createCheckBox(gui,"cbxGOGuild_clicked","GO GUILD MESAJ AKTİF ET !",350,175)
 cbxGOUnion = QtBind.createCheckBox(gui,"cbxGOUnion_clicked","GO UNION MESAJ AKTİF ET !",350,190)
+QtBind.createLabel(gui,'GOJOB MESAJ KOMUTLARI : ',525,120)
+QtBind.createList(gui,525,140,190,70)
+cbxGOJobAll = QtBind.createCheckBox(gui,"cbxGOJobAll_clicked","GOJOB ALL MESAJ AKTİF ET !",530,145)
+cbxGOJobParty = QtBind.createCheckBox(gui,"cbxGOJobParty_clicked","GOJOB PARTY MESAJ AKTİF ET !",530,160)
+cbxGOJobGuild = QtBind.createCheckBox(gui,"cbxGOJobGuild_clicked","GOJOB GUILD MESAJ AKTİF ET !",530,175)
+cbxGOJobUnion = QtBind.createCheckBox(gui,"cbxGOJobUnion_clicked","GOJOB UNION MESAJ AKTİF ET !",530,190)
 # ______________________________METHODLAR ______________________________ #
 # TRController CONFIG YOLU
 def getPath():
@@ -83,6 +89,10 @@ def loadDefaultConfig():
 	QtBind.setChecked(gui, cbxGOParty, False)
 	QtBind.setChecked(gui, cbxGOGuild, False)
 	QtBind.setChecked(gui, cbxGOUnion, False)
+	QtBind.setChecked(gui, cbxGOJobAll, False)
+	QtBind.setChecked(gui, cbxGOJobParty, False)
+	QtBind.setChecked(gui, cbxGOJobGuild, False)
+	QtBind.setChecked(gui, cbxGOJobUnion, False)
 # ONCEKI KAYITLI TUM CONFIGLERI YUKLEME
 def loadConfigs():
 	loadDefaultConfig()
@@ -110,6 +120,18 @@ def loadConfigs():
 			if "GOMessageUnion" in data:
 				if data["GOMessageUnion"] == "True":
 					QtBind.setChecked(gui, cbxGOUnion, True)
+			if "GOJobMessageAll" in data:
+				if data["GOJobMessageAll"] == "True":
+					QtBind.setChecked(gui, cbxGOJobAll, True)
+			if "GOJobMessageParty" in data:
+				if data["GOJobMessageParty"] == "True":
+					QtBind.setChecked(gui, cbxGOJobParty, True)
+			if "GOJobMessageGuild" in data:
+				if data["GOJobMessageGuild"] == "True":
+					QtBind.setChecked(gui, cbxGOJobGuild, True)
+			if "GOJobMessageUnion" in data:
+				if data["GOJobMessageUnion"] == "True":
+					QtBind.setChecked(gui, cbxGOJobUnion, True)
 def cbxGOAll_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -125,9 +147,6 @@ def cbxGOAll_clicked(checked):
 		data['GOMessageAll']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
-	QtBind.setChecked(gui, cbxGOParty, False)
-	QtBind.setChecked(gui, cbxGOGuild, False)
-	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOParty_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -143,9 +162,6 @@ def cbxGOParty_clicked(checked):
 		data['GOMessageParty']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
-	QtBind.setChecked(gui, cbxGOAll, False)
-	QtBind.setChecked(gui, cbxGOGuild, False)
-	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOGuild_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -161,9 +177,6 @@ def cbxGOGuild_clicked(checked):
 		data['GOMessageGuild']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
-	QtBind.setChecked(gui, cbxGOParty, False)
-	QtBind.setChecked(gui, cbxGOAll, False)
-	QtBind.setChecked(gui, cbxGOUnion, False)
 def cbxGOUnion_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -179,9 +192,66 @@ def cbxGOUnion_clicked(checked):
 		data['GOMessageUnion']=(str(check))
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
-	QtBind.setChecked(gui, cbxGOParty, False)
-	QtBind.setChecked(gui, cbxGOGuild, False)
-	QtBind.setChecked(gui, cbxGOAll, False)
+def cbxGOJobAll_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOJobMessageAll" in data:
+			data['GOJobMessageAll'] = []
+		check = QtBind.isChecked(gui,cbxGOJobAll)
+		data['GOJobMessageAll']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOJobParty_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOJobMessageParty" in data:
+			data['GOJobMessageParty'] = []
+		check = QtBind.isChecked(gui,cbxGOJobParty)
+		data['GOJobMessageParty']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOJobGuild_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOJobMessageGuild" in data:
+			data['GOJobMessageGuild'] = []
+		check = QtBind.isChecked(gui,cbxGOJobGuild)
+		data['GOJobMessageGuild']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+def cbxGOJobUnion_clicked(checked):
+	if inGame:
+		# Init dictionary
+		data = {}
+		# Load config if exist
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+		# Add new leader
+		if not "GOJobMessageUnion" in data:
+			data['GOJobMessageUnion'] = []
+		check = QtBind.isChecked(gui,cbxGOJobUnion)
+		data['GOJobMessageUnion']=(str(check))
+		with open(getConfig(),"w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
 def ListContains(text,lst):
 	text = text.lower()
 	for i in range(len(lst)):
@@ -592,6 +662,16 @@ def handle_chat(t,player,msg):
 			data.append(int(msgData[7], 16))
 			data.append(int(msgData[8], 16))
 			inject_joymax(0x705A, data, False)
+		elif msg.startswith("GOJOB"):
+			msgData = msg[3:].split()
+			data = bytearray()
+			data.append(int(msgData[0], 16))
+			data.append(int(msgData[1], 16))
+			data.append(int(msgData[2], 16))
+			data.append(int(msgData[3], 16))
+			data.append(int(msgData[4], 16))
+			data.append(int(msgData[5], 16))
+			inject_joymax(0x705A, data, False)
 		elif msg == "DURDUR":
 			stop_bot()
 			log("Plugin: BOT DURDURULDU")
@@ -947,6 +1027,15 @@ def handle_chat(t,player,msg):
 		elif msg == "J33":
 			log("Plugin: JANGAN FORTRESS 3>3")
 			inject_joymax( 0x705A,b'\x0A\x00\x00\x00\x02\x33\x00\x00\x00',False)
+		elif msg == "HWT1":
+			log("Plugin: HOLY WATER TEMPLE KAT: 1 GİRİŞİ..")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\xA5\x00\x00\x00',False)
+		elif msg == "HWT2":
+			log("Plugin: HOLY WATER TEMPLE KAT: 2 GİRİŞİ..")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\xA6\x00\x00\x00',False)
+		elif msg == "HWT3":
+			log("Plugin: HOLY WATER TEMPLE KAT: 3 GİRİŞİ..")
+			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\xA7\x00\x00\x00',False)
 # YEDEK
 def ResetSkip():
 	global SkipCommand
@@ -1303,6 +1392,22 @@ def handle_silkroad(opcode, data):
 		return True
 	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOUnion):
 		phBotChat.Union('GO ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobAll):
+		phBotChat.All('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobParty):
+		phBotChat.Party('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobGuild):
+		phBotChat.Guild('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
+		return True
+	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobUnion):
+		phBotChat.Union('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	return True
