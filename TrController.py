@@ -14,7 +14,7 @@ import signal
 import subprocess
 
 pName = 'TrController'
-pVersion = '1.0.6'
+pVersion = '1.0.7'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 # KURULUM
@@ -662,7 +662,7 @@ def handle_chat(t,player,msg):
 			data.append(int(msgData[7], 16))
 			data.append(int(msgData[8], 16))
 			inject_joymax(0x705A, data, False)
-		elif msg.startswith("GOJOB"):
+		elif msg.startswith("GJ"):
 			msgData = msg[3:].split()
 			data = bytearray()
 			data.append(int(msgData[0], 16))
@@ -1395,19 +1395,19 @@ def handle_silkroad(opcode, data):
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobAll):
-		phBotChat.All('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		phBotChat.All('GJ ' + ' '.join('{:02X}'.format(x) for x in data))
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobParty):
-		phBotChat.Party('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		phBotChat.Party('GJ ' + ' '.join('{:02X}'.format(x) for x in data))
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobGuild):
-		phBotChat.Guild('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		phBotChat.Guild('GJ ' + ' '.join('{:02X}'.format(x) for x in data))
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	if '{:02X}'.format(opcode) == "705A" and QtBind.isChecked(gui, cbxGOJobUnion):
-		phBotChat.Union('GOJOB ' + ' '.join('{:02X}'.format(x) for x in data))
+		phBotChat.Union('GJ ' + ' '.join('{:02X}'.format(x) for x in data))
 		# log(str(opcode)+"Client: (Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ str(data))
 		return True
 	return True
