@@ -12,10 +12,23 @@ import os
 import sqlite3
 import signal
 import subprocess
+from re import search
 
 pName = 'TrController'
-pVersion = '1.0.7'
+pVersion = '1.1.0'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
+
+COMMANDS_CODES = {
+	'ZERKPOT': ['ZERKPOT'],
+	'STRSC': ['STRSC'],
+	'INTSC': ['INTSC'],
+	'MPSC': ['MPSC'],
+	'HPSC': ['HPSC'],
+	'DAMAGESC': ['DAMAGESC'],
+	'RESSC': ['RESSC'],
+	'TGSC': ['TGSC'],
+	'DAMAGEABSSC': ['DAMAGEABSSC']
+}
 
 # KURULUM
 path = get_config_dir()[:-7]
@@ -568,10 +581,12 @@ def UseItem(item):
 	p = struct.pack('<B',item['slot'])
 	loc = get_locale()
 	tid = GetTIDFromItem(item['model'])
-	if loc == 22: # vsro
-		p += struct.pack('<H',tid)
+	if loc == 22:  # vsro
+		p += struct.pack('<H', tid)
+	elif loc == 56:  # trsro
+		p += struct.pack('<I', tid)
 	else:
-		p += struct.pack('<I',tid)
+		p += struct.pack('<I', tid)
 	log('Plugin: ITEM KULLANILIYOR : "'+item['name']+'"...')
 	inject_joymax(0x704C,p,True)
 def GetTIDFromItem(itemId):
@@ -626,6 +641,48 @@ def getnickname(UniqueID):
 def Inject_SelectTarget(targetUID):
 	p = struct.pack('<I', targetUID)
 	inject_joymax(0x7045, p, False)
+
+def use_item_with_index(index):
+	p = struct.pack('B', index)
+	p += b'\x30\x0C\x0D\x0E'
+	# CLIENT_INVENTORY_ITEM_USE_REQUEST
+	log("Data: " + str(p))
+	inject_joymax(0x704C, p, True)
+def use_item_with_index_scroll(index):
+	p = struct.pack('B', index)
+	p += b'\x30\x0C\x0D\x01'
+	# CLIENT_INVENTORY_ITEM_USE_REQUEST
+	log("Data: " + str(p))
+	inject_joymax(0x704C, p, True)
+def use_item_with_index_scroll2(index):
+	p = struct.pack('B', index)
+	p += b'\x31\x0C\x0D\x01'
+	# CLIENT_INVENTORY_ITEM_USE_REQUEST
+	log("Data: " + str(p))
+	inject_joymax(0x704C, p, True)
+def use_item_with_index_scroll3(index):
+	p = struct.pack('B', index)
+	p += b'\x31\x0C\x0D\x06'
+	# CLIENT_INVENTORY_ITEM_USE_REQUEST
+	log("Data: " + str(p))
+	inject_joymax(0x704C, p, True)
+def get_item_count(searchingItem):
+	count = 0
+	if searchingItem is None:
+		return count
+	items = get_inventory()['items']
+	for item in items:
+		if item is not None and item['name'] == searchingItem['name']:
+			count += item['quantity']
+	return count
+def parseData(data):
+	data = data.split()
+	if len(data) < 1:
+		return None, None
+	if len(data) == 1:
+		return data[0], None
+	if len(data) > 1:
+		return data[0], data[1:]
 # ______________________________ ETKINLIKLER ______________________________ #
 # PLUGIN BAGLANTISI
 def connected():
@@ -645,6 +702,7 @@ def handle_chat(t,player,msg):
 		msg = msg.split(': ',1)[1]
 	# KOMUTU VEREN LIDER LISTESINDE YA DA DC UZERINDE MI
 	if player and lstLeaders_exist(player) or t == 100:
+		handle_commands(msg, player)
 		# MESAJ KOMUTLARI
 		if msg == "BASLAT":
 			start_bot()
@@ -951,6 +1009,20 @@ def handle_chat(t,player,msg):
 		elif msg == "DEFFOFF":
 			QtBind.setChecked(gui, cbxDefensive, False)
 			log('Plugin: DEFANS MODU KAPATILDI.')
+		elif msg == "INFO":
+			char_data = get_character_data()
+			currentHp = (char_data['hp'] / char_data['hp_max']) * 100
+			currentExp = (char_data['current_exp'] / char_data['max_exp']) * 100
+			currentJobExp = (char_data['job_current_exp'] / char_data['job_max_exp']) * 100
+			level = char_data['level']
+			gold = char_data['gold']
+			skillpoint = char_data['sp']
+			jobname = char_data['job_name']
+			guildname = char_data['guild']
+			message = "HP: {:0.2f}, EXP: {:0.2f}, Level: {}, Job Exp: {:0.2f}, Gold: {:,}, SP: {}, Job Nick: {}, Guild: {}".format(currentHp, currentExp,
+																								  level, currentJobExp,
+																								  gold,skillpoint,jobname,guildname)
+			phBotChat.Private(player, message)
 	# GAUCHE EGLENCE KOMUTLARI
 		if msg == "WALK":
 			log("Plugin: YURUME MODU AKTIF")
@@ -1036,7 +1108,109 @@ def handle_chat(t,player,msg):
 		elif msg == "HWT3":
 			log("Plugin: HOLY WATER TEMPLE KAT: 3 GİRİŞİ..")
 			inject_joymax( 0x705A,b'\x03\x00\x00\x00\x02\xA7\x00\x00\x00',False)
-# YEDEK
+def handle_commands(data, player):
+	data = data.strip()
+	code, rest = parseData(data)
+	if code in COMMANDS_CODES['ZERKPOT']:
+		itemName = "Energy of life"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "ZERK POT MEVCUT DEĞİL.")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index(itemSlot)
+				Timer(2.0, inject_joymax, (0x715F, b'\x99\x5B\x00\x00\x91\x5B\x00\x00', False)).start()
+	elif code in COMMANDS_CODES['STRSC']:
+		itemName = "Strength Scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "STR SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll(itemSlot) or use_item_with_index_scroll2(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['INTSC']:
+		itemName = "Intelligence Scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "INT SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll(itemSlot) or use_item_with_index_scroll2(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['MPSC']:
+		itemName = "MP+"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "MP SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['HPSC']:
+		itemName = "HP+"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "HP SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['DAMAGESC']:
+		itemName = "20% damage"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "DAMAGE SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['RESSC']:
+		itemName = "Instant resurrection Scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "RESS SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['TGSC']:
+		itemName = "Trigger Scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "TRIGGER SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['DAMAGEABSSC']:
+		itemName = "20% damage absorption scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "DAMAGE ABS. SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
 def ResetSkip():
 	global SkipCommand
 	SkipCommand = False
