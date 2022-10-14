@@ -27,9 +27,9 @@ COMMANDS_CODES = {
 	'DAMAGESC': ['DAMAGESC'],
 	'RESSC': ['RESSC'],
 	'TGSC': ['TGSC'],
-	'DAMAGEABSSC': ['DAMAGEABSSC']
+	'DAMAGEABSSC': ['DAMAGEABSSC'],
+	'DAMAGEINCSC': ['DAMAGEINCSC']
 }
-
 # KURULUM
 path = get_config_dir()[:-7]
 StartBotAt = 0
@@ -1168,7 +1168,7 @@ def handle_commands(data, player):
 			if rest is None:
 				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
 	elif code in COMMANDS_CODES['DAMAGESC']:
-		itemName = "20% damage"
+		itemName = "20% damage increase/absorption scroll"
 		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
 		item_count = get_item_count(item)
 		if item is None or item_count == 0:
@@ -1206,6 +1206,17 @@ def handle_commands(data, player):
 		item_count = get_item_count(item)
 		if item is None or item_count == 0:
 			phBotChat.Private(player, "DAMAGE ABS. SCROLL BULUNAMADI..")
+		else:
+			itemSlot = item['slot']
+			log("Item slot: " + str(itemSlot))
+			if rest is None:
+				use_item_with_index_scroll2(itemSlot) or use_item_with_index_scroll(itemSlot) or use_item_with_index(itemSlot) or use_item_with_index_scroll3(itemSlot)
+	elif code in COMMANDS_CODES['DAMAGEINCSC']:
+		itemName = "20% damage increase scroll"
+		item = GetItemByExpression(lambda n, s: itemName in n or itemName == s, 13)
+		item_count = get_item_count(item)
+		if item is None or item_count == 0:
+			phBotChat.Private(player, "DAMAGE INC. SCROLL BULUNAMADI..")
 		else:
 			itemSlot = item['slot']
 			log("Item slot: " + str(itemSlot))
