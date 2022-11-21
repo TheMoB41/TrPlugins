@@ -10,7 +10,7 @@ import os
 import subprocess
 
 pName = 'TrAcademy'
-pVersion = '1.0.2'
+pVersion = '1.0.3'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrSro-Plugins/main/TrAcademy'
 
 # User settings
@@ -446,7 +446,7 @@ def OnCharacterList(CharList):
 					select_character(charName)
 					return
 				#CHAR LİMİTİ
-	if len(CharList) < 4:
+	if len(CharList) < 1:
 		if QtBind.isChecked(gui,cbxCharKur):
 			global isCreatingCharacter
 			isCreatingCharacter = True
