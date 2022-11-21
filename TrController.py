@@ -15,7 +15,7 @@ import subprocess
 from re import search
 
 pName = 'TrController'
-pVersion = '1.1.0'
+pVersion = '1.2.0'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrController.py'
 
 COMMANDS_CODES = {
@@ -79,6 +79,104 @@ cbxGOJobAll = QtBind.createCheckBox(gui,"cbxGOJobAll_clicked","GOJOB ALL MESAJ A
 cbxGOJobParty = QtBind.createCheckBox(gui,"cbxGOJobParty_clicked","GOJOB PARTY MESAJ AKTİF ET !",530,160)
 cbxGOJobGuild = QtBind.createCheckBox(gui,"cbxGOJobGuild_clicked","GOJOB GUILD MESAJ AKTİF ET !",530,175)
 cbxGOJobUnion = QtBind.createCheckBox(gui,"cbxGOJobUnion_clicked","GOJOB UNION MESAJ AKTİF ET !",530,190)
+#GUI2
+gui_ = QtBind.init(__name__,pName+"( BUTON )")
+x=10
+y=10
+QtBind.createLabel(gui_,'GÖNDERİLECEK CHAT\n          KANALI : ',x+605,y+165)
+QtBind.createList(gui_,x+615,y+195,95,105)
+cbxAllChat = QtBind.createCheckBox(gui_,"cbxAll_clicked","ALL CHAT",x+620,y+200)
+cbxPartyChat = QtBind.createCheckBox(gui_,"cbxParty_clicked","PARTY CHAT",x+620,y+215)
+cbxGuildChat = QtBind.createCheckBox(gui_,"cbxGuild_clicked","GUILD CHAT",x+620,y+230)
+cbxUnionChat = QtBind.createCheckBox(gui_,"cbxUnion_clicked","UNION CHAT",x+620,y+245)
+cbxprivateChat = QtBind.createCheckBox(gui_,"cbxprivate_clicked","PRIVATE CHAT",x+620,y+260)
+tbxprivatechat = QtBind.createLineEdit(gui_,"PLAYER",x+640,y+275,60,20)
+btnkaydet = QtBind.createButton(gui_,'btnkaydet_clicked'," DEGISIKLIKLERI KAYDET ",x+480,y+210)
+QtBind.createList(gui_,5,5,110,305)
+btnbotbaslat = QtBind.createButton(gui_,'btnbotbaslat_clicked',"     BAŞLAT     ",x,y)
+btnbotdurdur = QtBind.createButton(gui_,'btnbotdurdur_clicked',"    DURDUR    ",x,y+25)
+btntrace = QtBind.createButton(gui_,'btntrace_clicked',"     TRACE     ",x,y+50)
+btnnotrace = QtBind.createButton(gui_,'btnnotrace_clicked',"   NOTRACE   ",x,y+75)
+btnreturn= QtBind.createButton(gui_,'btnreturn_clicked',"    RETURN     ",x,y+100)
+btnfollow = QtBind.createButton(gui_,'btnfollow_clicked',"    FOLLOW    ",x,y+125)
+btnnofollow = QtBind.createButton(gui_,'btnnofollow_clicked'," NOFOLLOW ",x,y+150)
+btnzerk= QtBind.createButton(gui_,'btnzerk_clicked',"       ZERK       ",x,y+175)
+btnkoral = QtBind.createButton(gui_,'btnkoral_clicked',"     KORAL    	 ",x,y+200)
+btndagil= QtBind.createButton(gui_,'btndagil_clicked',"      DAGIL      ",x,y+225)
+btnrevreturn= QtBind.createButton(gui_,'btnrevreturn_clicked',"  REVERSE RETURN  ",x,y+250)
+btnrevolum= QtBind.createButton(gui_,'btnrevolum_clicked'," REVERSE OLUM ",x,y+275)
+QtBind.createList(gui_,115,5,200,305)
+btnprofil= QtBind.createButton(gui_,'btnprofil_clicked',"     PROFIL     ",x+110,y)
+tbxprofil = QtBind.createLineEdit(gui_,"PROFIL ISMI",x+185,y-2,100,20)
+btninject= QtBind.createButton(gui_,'btninject_clicked',"     INJECT     ",x+110,y+25)
+tbxinject = QtBind.createLineEdit(gui_,"OPCODE+DATA",x+185,y+23,100,20)
+btnrecall= QtBind.createButton(gui_,'btnrecall_clicked',"     RECALL     ",x+110,y+50)
+tbxrecall = QtBind.createLineEdit(gui_,"TOWN ISMI",x+185,y+48,100,20)
+btnsckur= QtBind.createButton(gui_,'btnsckur_clicked',"     SCKUR     ",x+110,y+75)
+tbxsckur = QtBind.createLineEdit(gui_,"DOSYA YOLU",x+185,y+73,100,20)
+btnalankur= QtBind.createButton(gui_,'btnalankur_clicked',"   ALANKUR   ",x+110,y+100)
+tbxalankur = QtBind.createLineEdit(gui_,"ALAN ADI",x+185,y+98,100,20)
+btnrevalan= QtBind.createButton(gui_,'btnrevalan_clicked',"  REVERSE ALAN   ",x+110,y+125)
+tbxrevalan = QtBind.createLineEdit(gui_,"ALAN ADI",x+205,y+123,80,20)
+btnrevplayer= QtBind.createButton(gui_,'btnrevplayer_clicked'," REVERSE PLAYER ",x+110,y+150)
+tbxrevplayer = QtBind.createLineEdit(gui_,"PLAYER",x+205,y+148,80,20)
+btngiy= QtBind.createButton(gui_,'btngiy_clicked',"        GİY        ",x+110,y+175)
+tbxgiy = QtBind.createLineEdit(gui_,"ITEM ADI",x+185,y+173,100,20)
+btncikart= QtBind.createButton(gui_,'btncikart_clicked',"     CIKART     ",x+110,y+200)
+tbxcikart = QtBind.createLineEdit(gui_,"ITEM ADI",x+185,y+198,100,20)
+btntraceplayer = QtBind.createButton(gui_,'btntraceplayer_clicked',"     TRACE     ",x+110,y+225)
+tbxtraceplayer = QtBind.createLineEdit(gui_,"PLAYER",x+185,y+223,100,20)
+btnkorkur = QtBind.createButton(gui_,'btnkorkur_clicked',"    KORKUR    ",x+110,y+250)
+tbxkorkur = QtBind.createLineEdit(gui_,"X,Y",x+185,y+248,100,20)
+btnrange = QtBind.createButton(gui_,'btnrange_clicked',"     RANGE     ",x+110,y+275)
+tbxrange = QtBind.createLineEdit(gui_,"000035",x+185,y+273,100,20)
+QtBind.createList(gui_,315,5,80,305)
+btnstrsc = QtBind.createButton(gui_,'btnstrsc_clicked',"      STRSC     ",x+310,y)
+btndc= QtBind.createButton(gui_,'btndc_clicked',"        DC        ",x+310,y+25)
+btnptayril= QtBind.createButton(gui_,'btnptayril_clicked',"    PTAYRIL    ",x+310,y+50)
+btnintsc = QtBind.createButton(gui_,'btnintsc_clicked',"      INTSC     ",x+310,y+75)
+btninfo= QtBind.createButton(gui_,'btninfo_clicked',"       INFO      ",x+310,y+100)
+btntargeton= QtBind.createButton(gui_,'btntargeton_clicked',"  TARGETON  ",x+310,y+125)
+btntargetoff= QtBind.createButton(gui_,'btntargetoff_clicked'," TARGETOFF ",x+310,y+150)
+btndeffon= QtBind.createButton(gui_,'btndeffon_clicked',"    DEFFON    ",x+310,y+175)
+btndeffoff= QtBind.createButton(gui_,'btndeffoff_clicked',"   DEFFOFF   ",x+310,y+200)
+btnhwt= QtBind.createButton(gui_,'btnhwt_clicked',"      HWT1     ",x+310,y+225)
+btnhwtt= QtBind.createButton(gui_,'btnhwtt_clicked',"      HWT2     ",x+310,y+250)
+btnhwttt= QtBind.createButton(gui_,'btnhwttt_clicked',"      HWT3     ",x+310,y+275)
+QtBind.createList(gui_,395,105,90,150)
+btnressc = QtBind.createButton(gui_,'btnressc_clicked',"        RESSC        ",x+390,y+100)
+btntgsc = QtBind.createButton(gui_,'btntgsc_clicked',"         TGSC         ",x+390,y+125)
+btnhpsc = QtBind.createButton(gui_,'btnhpsc_clicked',"         HPSC         ",x+390,y+150)
+btnmpsc = QtBind.createButton(gui_,'btnmpsc_clicked',"         MPSC         ",x+390,y+175)
+btndamagesc = QtBind.createButton(gui_,'btndamagesc_clicked',"    DAMAGESC    ",x+390,y+200)
+btndamageabssc = QtBind.createButton(gui_,'btndamageabssc_clicked'," DAMAGEABSSC ",x+390,y+225)
+QtBind.createList(gui_,395,255,185,55)
+btntp= QtBind.createButton(gui_,'btntp_clicked',"        TP        ",x+390,y+250)
+tbxtp = QtBind.createLineEdit(gui_,"A,B",x+465,y+248,100,20)
+btncape= QtBind.createButton(gui_,'btncape_clicked',"      CAPE      ",x+390,y+275)
+tbxcape = QtBind.createLineEdit(gui_,"RENK",x+465,y+273,100,20)
+QtBind.createList(gui_,395,5,215,50)
+lblbilgi = QtBind.createLabel(gui_,'Bulunduğun Char :',x+420,y)
+lblcharname = QtBind.createLabel(gui_,'',x+510,y)
+lblbilgii = QtBind.createLabel(gui_,'Lider Listesine',x+390,y+25)
+btnliderekle= QtBind.createButton(gui_,'btnliderekle_clicked',"      EKLE      ",x+460,y+25)
+btnlidercikart= QtBind.createButton(gui_,'btnlidercikart_clicked',"    ÇIKART    ",x+530,y+25)
+QtBind.createList(gui_,395,55,315,25)
+lblhotanftw = QtBind.createLabel(gui_,'Hotan Fortress :',x+390,y+50)
+tbxhotandis = QtBind.createLineEdit(gui_,"DIS KAPI NO",x+475,y+47,70,20)
+lblhotanftww = QtBind.createLabel(gui_,'dan',x+555,y+50)
+tbxhotanic = QtBind.createLineEdit(gui_,"IC KAPI NO",x+585,y+47,70,20)
+btnhotanftw = QtBind.createButton(gui_,'btnhotanftw_clicked'," GİT ",x+670,y+50)
+QtBind.createList(gui_,395,75,315,25)
+lbljanganftw = QtBind.createLabel(gui_,'Jangan Fortress :',x+390,y+70)
+tbxjangandis = QtBind.createLineEdit(gui_,"DIS KAPI NO",x+475,y+67,70,20)
+lbljanganftww = QtBind.createLabel(gui_,'dan',x+555,y+70)
+tbxjanganic = QtBind.createLineEdit(gui_,"IC KAPI NO",x+585,y+67,70,20)
+btnjanganftw = QtBind.createButton(gui_,'btnjanganftw_clicked'," GİT ",x+670,y+70)
+QtBind.createList(gui_,488,115,232,55)
+btnchat = QtBind.createButton(gui_,'btnchat_clicked',"         CHAT         ",x+560,y+110)
+tbxchatcesit = QtBind.createLineEdit(gui_,"CESIT",x+485,y+135,50,20)
+tbxchatmesaj = QtBind.createLineEdit(gui_,"MESAJ",x+540,y+135,168,20)
 # ______________________________METHODLAR ______________________________ #
 # TRController CONFIG YOLU
 def getPath():
@@ -145,6 +243,887 @@ def loadConfigs():
 			if "GOJobMessageUnion" in data:
 				if data["GOJobMessageUnion"] == "True":
 					QtBind.setChecked(gui, cbxGOJobUnion, True)
+			if "PRIVATECHAT" in data:
+				QtBind.setText(gui_, tbxprivatechat, data["PRIVATECHAT"])
+			if "PROFIL" in data:
+				QtBind.setText(gui_, tbxprofil, data["PROFIL"])
+			if "INJECT" in data:
+				QtBind.setText(gui_, tbxinject, data["INJECT"])
+			if "RECALL" in data:
+				QtBind.setText(gui_, tbxrecall, data["RECALL"])
+			if "SCKUR" in data:
+				QtBind.setText(gui_, tbxsckur, data["SCKUR"])
+			if "ALANKUR" in data:
+				QtBind.setText(gui_, tbxalankur, data["ALANKUR"])
+			if "REVALAN" in data:
+				QtBind.setText(gui_, tbxrevalan, data["REVALAN"])
+			if "REVPLAYER" in data:
+				QtBind.setText(gui_, tbxrevplayer, data["REVPLAYER"])
+			if "GIY" in data:
+				QtBind.setText(gui_, tbxgiy, data["GIY"])
+			if "CIKART" in data:
+				QtBind.setText(gui_, tbxcikart, data["CIKART"])
+			if "TRACEPL" in data:
+				QtBind.setText(gui_, tbxtraceplayer, data["TRACEPL"])
+			if "KORKUR" in data:
+				QtBind.setText(gui_, tbxkorkur, data["KORKUR"])
+			if "RANGE" in data:
+				QtBind.setText(gui_, tbxrange, data["RANGE"])
+			if "TP" in data:
+				QtBind.setText(gui_, tbxtp, data["TP"])
+			if "CAPE" in data:
+				QtBind.setText(gui_, tbxcape, data["CAPE"])
+			if "HDIS" in data:
+				QtBind.setText(gui_, tbxhotandis, data["HDIS"])
+			if "HIC" in data:
+				QtBind.setText(gui_, tbxhotanic, data["HIC"])
+			if "JDIS" in data:
+				QtBind.setText(gui_, tbxjangandis, data["JDIS"])
+			if "JIC" in data:
+				QtBind.setText(gui_, tbxjanganic, data["JIC"])
+			if "CHATCESIT" in data:
+				QtBind.setText(gui_, tbxchatcesit, data["CHATCESIT"])
+			if "CHATMESAJ" in data:
+				QtBind.setText(gui_, tbxchatmesaj, data["CHATMESAJ"])
+def btnkaydet_clicked():
+	if inGame:
+		data = {}
+		if os.path.exists(getConfig()):
+			with open(getConfig(), 'r') as f:
+				data = json.load(f)
+			data["PRIVATECHAT"] = QtBind.text(gui_, tbxprivatechat)
+			data["PROFIL"] = QtBind.text(gui_, tbxprofil)
+			data["INJECT"] = QtBind.text(gui_, tbxinject)
+			data["RECALL"] = QtBind.text(gui_, tbxrecall)
+			data["SCKUR"] = QtBind.text(gui_, tbxsckur)
+			data["ALANKUR"] = QtBind.text(gui_, tbxalankur)
+			data["REVALAN"] = QtBind.text(gui_, tbxrevalan)
+			data["REVPLAYER"] = QtBind.text(gui_, tbxrevplayer)
+			data["GIY"] = QtBind.text(gui_, tbxgiy)
+			data["CIKART"] = QtBind.text(gui_, tbxcikart)
+			data["TRACEPL"] = QtBind.text(gui_, tbxtraceplayer)
+			data["KORKUR"] = QtBind.text(gui_, tbxkorkur)
+			data["RANGE"] = QtBind.text(gui_, tbxrange)
+			data["TP"] = QtBind.text(gui_, tbxtp)
+			data["CAPE"] = QtBind.text(gui_, tbxcape)
+			data["HDIS"] = QtBind.text(gui_, tbxhotandis)
+			data["HIC"] = QtBind.text(gui_, tbxhotanic)
+			data["JDIS"] = QtBind.text(gui_, tbxjangandis)
+			data["JIC"] = QtBind.text(gui_, tbxjanganic)
+			data["CHATCESIT"] = QtBind.text(gui_, tbxchatcesit)
+			data["CHATMESAJ"] = QtBind.text(gui_, tbxchatmesaj)
+		with open(getConfig(), "w") as f:
+			f.write(json.dumps(data, indent=4, sort_keys=True))
+		log('Plugin Buton: CONFIG KAYIT EDİLDİ.. ')
+def btnbotbaslat_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('BASLAT')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('BASLAT')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('BASLAT')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('BASLAT')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "BASLAT")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnbotdurdur_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DURDUR')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DURDUR')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DURDUR')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DURDUR')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DURDUR")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntrace_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TRACE')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TRACE')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TRACE')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TRACE')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TRACE")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnnotrace_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('NOTRACE')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('NOTRACE')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('NOTRACE')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('NOTRACE')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "NOTRACE")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntraceplayer_clicked():
+	NICK = QtBind.text(gui_, tbxtraceplayer)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TRACE '+NICK)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TRACE '+NICK)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TRACE '+NICK)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TRACE '+NICK)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TRACE "+NICK)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnfollow_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('FOLLOW')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+def btnnofollow_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('NOFOLLOW')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		log('Plugin Buton: BU KOMUT YALNIZCA PARTY CHATTE KULLANILABİLİR..')
+def btnkorkur_clicked():
+	XY = QtBind.text(gui_, tbxkorkur)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('KORKUR '+XY)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('KORKUR '+XY)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('KORKUR '+XY)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('KORKUR '+XY)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "KORKUR "+XY)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnkoral_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('KORAL')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('KORAL')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('KORAL')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('KORAL')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "KORAL")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrange_clicked():
+	range = QtBind.text(gui_, tbxrange)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('RANGE '+range)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('RANGE '+range)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('RANGE '+range)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('RANGE '+range)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "RANGE "+range)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnsckur_clicked():
+	sckur = QtBind.text(gui_, tbxsckur)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('SCKUR '+sckur)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('SCKUR '+sckur)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('SCKUR '+sckur)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('SCKUR '+sckur)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "SCKUR "+sckur)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnalankur_clicked():
+	alankur = QtBind.text(gui_, tbxalankur)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('ALANKUR '+alankur)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('ALANKUR '+alankur)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('ALANKUR '+alankur)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('ALANKUR '+alankur)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "ALANKUR "+alankur)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnprofil_clicked():
+	profil = QtBind.text(gui_, tbxprofil)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('PROFIL '+profil)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('PROFIL '+profil)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('PROFIL '+profil)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('PROFIL '+profil)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "PROFIL "+profil)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btninject_clicked():
+	opcodedata = QtBind.text(gui_, tbxinject)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('INJECT '+opcodedata)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('INJECT '+opcodedata)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('INJECT '+opcodedata)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('INJECT '+opcodedata)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "INJECT "+opcodedata)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrecall_clicked():
+	recall = QtBind.text(gui_, tbxrecall)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('RECALL '+recall)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('RECALL '+recall)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('RECALL '+recall)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('RECALL '+recall)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "RECALL "+recall)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrevreturn_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('REVERSE RETURN')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('REVERSE RETURN')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('REVERSE RETURN')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('REVERSE RETURN')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "REVERSE RETURN")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrevolum_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('REVERSE OLUM')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('REVERSE OLUM')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('REVERSE OLUM')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('REVERSE OLUM')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "REVERSE OLUM")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrevalan_clicked():
+	alan = QtBind.text(gui_, tbxrevalan)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('REVERSE ALAN '+alan)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('REVERSE ALAN '+alan)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('REVERSE ALAN '+alan)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('REVERSE ALAN '+alan)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "REVERSE ALAN "+alan)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnrevplayer_clicked():
+	revplayer = QtBind.text(gui_, tbxrevplayer)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('REVERSE PLAYER '+revplayer)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('REVERSE PLAYER '+revplayer)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('REVERSE PLAYER '+revplayer)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('REVERSE PLAYER '+revplayer)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "REVERSE PLAYER "+revplayer)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btngiy_clicked():
+	giy = QtBind.text(gui_, tbxgiy)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('GIY '+giy)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('GIY '+giy)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('GIY '+giy)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('GIY '+giy)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "GIY "+giy)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btncikart_clicked():
+	cikart = QtBind.text(gui_, tbxcikart)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('CIKART '+cikart)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('CIKART '+cikart)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('CIKART '+cikart)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('CIKART '+cikart)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "CIKART "+cikart)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnreturn_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('RETURN')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('RETURN')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('RETURN')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('RETURN')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "RETURN")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnzerk_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('ZERK')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('ZERK')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('ZERK')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('ZERK')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "ZERK")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndagil_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DAGIL')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DAGIL')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DAGIL')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DAGIL')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DAGIL")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntp_clicked():
+	tp = QtBind.text(gui_, tbxtp)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TP '+tp)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TP '+tp)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TP '+tp)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TP '+tp)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TP "+tp)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnptayril_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('PTAYRIL')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('PTAYRIL')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('PTAYRIL')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('PTAYRIL')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "PTAYRIL")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntargeton_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TARGETON')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TARGETON')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TARGETON')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TARGETON')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TARGETON")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntargetoff_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TARGETOFF')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TARGETOFF')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TARGETOFF')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TARGETOFF')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TARGETOFF")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndeffon_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DEFFON')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DEFFON')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DEFFON')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DEFFON')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DEFFON")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndeffoff_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DEFFOFF')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DEFFOFF')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DEFFOFF')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DEFFOFF')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DEFFOFF")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnhwt_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('HWT1')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('HWT1')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('HWT1')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('HWT1')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "HWT1")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnhwtt_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('HWT2')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('HWT2')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('HWT2')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('HWT2')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "HWT2")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnhwttt_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('HWT3')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('HWT3')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('HWT3')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('HWT3')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "HWT3")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btncape_clicked():
+	renk = QtBind.text(gui_, tbxcape)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('CAPE '+renk)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('CAPE '+renk)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('CAPE '+renk)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('CAPE '+renk)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "CAPE "+renk)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btninfo_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('INFO')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('INFO')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('INFO')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('INFO')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "INFO")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnstrsc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('STRSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('STRSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('STRSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('STRSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "STRSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnintsc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('INTSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('INTSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('INTSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('INTSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "INTSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnhpsc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('HPSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('HPSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('HPSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('HPSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "HPSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnmpsc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('MPSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('MPSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('MPSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('MPSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "MPSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndamagesc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DAMAGESC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DAMAGESC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DAMAGESC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DAMAGESC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DAMAGESC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btndamageabssc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('DAMAGEABSSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('DAMAGEABSSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('DAMAGEABSSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('DAMAGEABSSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "DAMAGEABSSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnressc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('RESSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('RESSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('RESSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('RESSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "RESSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btntgsc_clicked():
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('TGSC')
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('TGSC')
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('TGSC')
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('TGSC')
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "TGSC")
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnchat_clicked():
+	cesit = QtBind.text(gui_, tbxchatcesit)
+	mesaj = QtBind.text(gui_, tbxchatmesaj)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('CHAT '+cesit+' '+mesaj)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('CHAT '+cesit+' '+mesaj)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('CHAT '+cesit+' '+mesaj)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('CHAT '+cesit+' '+mesaj)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer,'CHAT '+cesit+' '+mesaj)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnhotanftw_clicked():
+	dis = QtBind.text(gui_, tbxhotandis)
+	ic = QtBind.text(gui_, tbxhotanic)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('H'+dis+ic)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('H'+dis+ic)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('H'+dis+ic)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('H'+dis+ic)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "H"+dis+ic)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
+def btnjanganftw_clicked():
+	diss = QtBind.text(gui_, tbxjangandis)
+	icc = QtBind.text(gui_, tbxjanganic)
+	if QtBind.isChecked(gui_,cbxAllChat):
+		phBotChat.All('J'+diss+icc)
+		log('Plugin Buton: KOMUT ALL CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxPartyChat):
+		phBotChat.Party('J'+diss+icc)
+		log('Plugin Buton: KOMUT PARTY CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxGuildChat):
+		phBotChat.Guild('J'+diss+icc)
+		log('Plugin Buton: KOMUT GUILD CHATE  GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxUnionChat):
+		phBotChat.Union('J'+diss+icc)
+		log('Plugin Buton: KOMUT UNION CHATE GÖNDERİLDİ.. ')
+	if QtBind.isChecked(gui_,cbxprivateChat):
+		toplayer = QtBind.text(gui_, tbxprivatechat)
+		phBotChat.Private(toplayer, "J"+diss+icc)
+		log('Plugin Buton: KOMUT ' +toplayer+' A GÖNDERİLDİ.. ')
 def cbxGOAll_clicked(checked):
 	if inGame:
 		# Init dictionary
@@ -271,6 +1250,42 @@ def ListContains(text,lst):
 		if lst[i].lower() == text:
 			return True
 	return False
+def btnliderekle_clicked():
+	if inGame:
+		player = QtBind.text(gui_, lblcharname)
+		# LISTEDE CHAR VARSA
+		if player and not lstLeaders_exist(player):
+			data = {}
+			# CONFIG VARSA YUKLE
+			if os.path.exists(getConfig()):
+				with open(getConfig(), 'r') as f:
+					data = json.load(f)
+			# YENI LIDER EKLE
+			if not "Leaders" in data:
+				data['Leaders'] = []
+			data['Leaders'].append(player)
+			# CONFIGI YENIDEN YAPILANDIR
+			with open(getConfig(), "w") as f:
+				f.write(json.dumps(data, indent=4, sort_keys=True))
+			QtBind.append(gui, lstLeaders, player)
+			log('Plugin: Lider eklendi.. [' + player + ']')
+def btnlidercikart_clicked():
+	if inGame:
+		selectedItem = QtBind.text(gui_, lblcharname)
+		if selectedItem:
+			if os.path.exists(getConfig()):
+				data = {"Leaders": []}
+				with open(getConfig(), 'r') as f:
+					data = json.load(f)
+				try:
+					# MEVCUT ISIM VARKEN EKLENEN AYNI ISMI SILME
+					data["Leaders"].remove(selectedItem)
+					with open(getConfig(), "w") as f:
+						f.write(json.dumps(data, indent=4, sort_keys=True))
+				except:
+					pass  # DOSYA YOKSA GORMEZDEN GEL
+			QtBind.remove(gui, lstLeaders, selectedItem)
+			log('Plugin: Lider Silindi.. [' + selectedItem + ']')
 # LISTEYE LIDER EKLEME
 def btnAddLeader_clicked():
 	if inGame:
@@ -421,7 +1436,6 @@ def stop_follow():
 	followPlayer = ""
 	followDistance = 0
 	return result
-
 # PET ACTIRMAK
 def MountHorse():
 	item = GetItemByExpression(lambda n,s: s.startswith('ITEM_COS_C_'),13)
@@ -1391,6 +2405,9 @@ def OpenphBot(args):
 	log('Plugin: BOT YOLU BULUNAMADI..')
 	return 0
 def event_loop():
+	if inGame:
+		isim = get_character_data()['name']
+		QtBind.setText(gui_, lblcharname, isim)
 	global delay_counter, CheckStartTime, SkipCommand, CheckCloseTime
 	if CheckStartTime:
 		delay_counter += 500
@@ -1432,7 +2449,6 @@ def event_loop():
 			# Avoid negative numbers
 			log("TAKİP EDİLİYOR : "+followPlayer+"...")
 			move_to(player['x'],player['y'],0)
-
 def button_start():
 	global BtnStart, RecordedPackets
 	if len(QtBind.text(gui, SaveName)) <= 0:
