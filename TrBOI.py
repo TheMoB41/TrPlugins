@@ -6,7 +6,7 @@ import json
 import os
 
 pName = 'TrBOI'
-pVersion = '1.0.0'
+pVersion = '1.0.1'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrBOI.py'
 path = get_config_dir()+pName+"\\"
 
@@ -258,44 +258,44 @@ def SetSkills():
 	global CastSkills
 	if QtBind.isChecked(gui,cbxSolo71to80):
 		if QtBind.isChecked(gui,cbxYeoha):
-			CastSkills = [34574,34575]
+			CastSkills = [34574]
 		elif QtBind.isChecked(gui,cbxSeiren):
-			CastSkills = [34576,34577]
+			CastSkills = [34576]
 	elif QtBind.isChecked(gui,cbxPT71to80):
 		if QtBind.isChecked(gui,cbxYeoha):
-			CastSkills = [34582,34583]
+			CastSkills = [34582]
 		elif QtBind.isChecked(gui,cbxSeiren):
-			CastSkills = [34584,34585]
+			CastSkills = [34584]
 	elif QtBind.isChecked(gui,cbxSolo81to90):
 		if QtBind.isChecked(gui,cbxNiyaShaman):
-			CastSkills = [34578,34579]
+			CastSkills = [34578]
 		elif QtBind.isChecked(gui,cbxSlaveWatcher):
-			CastSkills = [34580,34581]
+			CastSkills = [34580]
 	elif QtBind.isChecked(gui,cbxPT81to90):
 		if QtBind.isChecked(gui,cbxNiyaShaman):
-			CastSkills = [34586,34587]
+			CastSkills = [34586]
 		elif QtBind.isChecked(gui,cbxSlaveWatcher):
-			CastSkills = [34588,34589]
+			CastSkills = [34588]
 	elif QtBind.isChecked(gui,cbxSolo91to100):
 		if QtBind.isChecked(gui,cbxDemonShaitan):
-			CastSkills = [34590,34591]
+			CastSkills = [34590]
 		elif QtBind.isChecked(gui,cbxImhotep):
-			CastSkills = [34592,34593]
+			CastSkills = [34592]
 	elif QtBind.isChecked(gui,cbxPT91to100):
 		if QtBind.isChecked(gui,cbxDemonShaitan):
-			CastSkills = [34598,34599]
+			CastSkills = [34598]
 		elif QtBind.isChecked(gui,cbxImhotep):
-			CastSkills = [34600,34601]
+			CastSkills = [34600]
 	elif QtBind.isChecked(gui,cbxSolo101to110):
 		if QtBind.isChecked(gui,cbxNephthys):
-			CastSkills = [34594,34595]
+			CastSkills = [34594]
 		elif QtBind.isChecked(gui,cbxTombSnakeLady):
-			CastSkills = [34596,34597]
+			CastSkills = [34596]
 	elif QtBind.isChecked(gui,cbxPT101to110):
 		if QtBind.isChecked(gui,cbxNephthys):
-			CastSkills = [34602,34603]
+			CastSkills = [34602]
 		elif QtBind.isChecked(gui,cbxTombSnakeLady):
-			CastSkills = [34604,34605]
+			CastSkills = [34604]
 def GetBOIType():
 	if QtBind.isChecked(gui,cbxSolo71to80):
 		return 228
