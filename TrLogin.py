@@ -7,7 +7,7 @@ from datetime import datetime
 from threading import Timer
 
 pName = 'TrLogin'
-pVersion = '0.0.1'
+pVersion = '0.0.2'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrLogin.py'
 timerCheck = None
 character_data = None
@@ -21,6 +21,9 @@ strToTime = "23:59"
 tbxToTime = QtBind.createLineEdit(gui,strToTime,121,43,37,20)
 lblFromTime2 = QtBind.createLabel(gui,"ARASI OYUNDA OL..",165,45)
 btnSaveTimes = QtBind.createButton(gui,'btnSaveTimes_clicked',"  KAYDET  ",85,70)
+x=10
+y=10
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",x+600,y+280)
 def getPath():
 	return get_config_dir()+pName+"\\"
 def getConfig():
@@ -51,6 +54,8 @@ def loadConfig():
 				CheckTimer()
 		else:
 			QtBind.setChecked(gui,cbxEnabled,False)
+def btnhakkinda_clicked():
+	log('\n\nTrLogin:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n    # BU PLUGIN ILE HERHANGİ BİR CHARIN GÜN İÇERİSİNDE HANGİ SAAT\nARALIKLARINDA OYUNDA KALMASINI İSTEDİĞİNİZİ BELİRLEYEBİLİRSİNİZ.\n BELİRTİLEN SAATLER HARİCİ BOT AÇIK KALIR CHAR OFFLİNE KALIR.\n NOT: HER CHAR İÇİN AYRI CONFİG KAYDI VARDIR.')
 def joined_game():
 	global character_data
 	character_data = get_character_data()
