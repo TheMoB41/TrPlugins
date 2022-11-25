@@ -6,7 +6,7 @@ import os
 import shutil
 
 pName = 'TrUpdater'
-pVersion = '1.0.0'
+pVersion = '1.0.1'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrUpdater.py'
 
 # ______________________________ YUKLEME ______________________________ #
@@ -17,7 +17,7 @@ lvwPlugins = QtBind.createList(gui,21,30,700,200)
 lstPluginsData = []
 btnCheck = QtBind.createButton(gui,'btnCheck_clicked',"  GUNCELLEMELERI KONTROL ET  ",300,8)
 btnUpdate = QtBind.createButton(gui,'btnUpdate_clicked',"  SECILEN PLUGINI GUNCELLE  ",480,8)
-lblPlugins2 = QtBind.createLabel(gui,"TrUpdater:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.",21,230)
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 # ______________________________ METHODLAR ______________________________ #
 # PLUGIN KLASORUNU KONTROL ETME
 def GetPluginsFolder():
@@ -56,6 +56,8 @@ def btnCheck_clicked():
 						pyInfo += "GUNCELLEME BASARISIZ. URL BULUNAMADI."
 					QtBind.append(gui,lvwPlugins,pyInfo)
 					lstPluginsData.append(pData)
+def btnhakkinda_clicked():
+	log('\n\nTrUpdater:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n    # BU PLUGIN BILGSAYARINIZDA GITHUB.COM UZERINDEN YAYINLANAN HERHANGI BIR YAZILIMCININ PLUGININI BULDUGU TAKTIRDE GUNCELLER..\n KULLANIMI:\n"GUNCELLEMELERI KONTROL ET" BUTONUNA BASTIKTAN SONRA; LISTEDE "GUNCELLEME BULUNDU" YAZAN PLUGINLERIN UZERINE TIKLAYIP, "SECILEN PLUGINI GUNCELLE" BUTONUNA BASINIZ.\n    # ISLEM BITIMINDE BOTUNUZU YENIDEN BASLATIRSANIZ VEYA "PLUGIN" SEKMESINDE "YENIDEN YUKLE" BUTONUNA TIKLARSANIZ PLUGININ SON VERSIYONUNU KULLANMAYA BASLAYABILIRSINIZ..')
 def getVersion(url):
 	try:
 		req = urllib.request.Request(url, headers={'User-Agent' : "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0"})
