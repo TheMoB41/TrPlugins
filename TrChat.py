@@ -20,7 +20,6 @@ cbxMsg_checked = False
 tbxMsg = QtBind.createLineEdit(gui,"",125,12,480,18)
 lblSpamCounter = QtBind.createLabel(gui,"MESAJ SAYACI :",620,13)
 lblCounter = QtBind.createLabel(gui,"0",700,13)
-lblLog = QtBind.createLabel(gui,"TrChat:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.",385,220)
 cbxLogsInOne = QtBind.createCheckBox(gui, 'cbxLog_clicked','MESAJLARI DOSYA OLARAK KAYDET.(log.txt)', 420, 45)
 cbxLogAll = QtBind.createCheckBox(gui,'cbxLog_clicked','GENEL',21,64)
 cbxLogPrivate = QtBind.createCheckBox(gui,'cbxLog_clicked','OZEL',21,83)
