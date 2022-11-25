@@ -4,22 +4,12 @@ import json
 import os
 
 pName = 'TrPacketTooL'
-pVersion = '1.0.0'
+pVersion = '2.0.0'
 pUrl = "https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrPacketTool.py"
 # ______________________________ KURULUM ______________________________ #
 # KULLANICI ARAYUZU
 gui = QtBind.init(__name__,pName)
-lblInject = QtBind.createLabel(gui,'PAKET ENJEKSIYON PLUGINI..',6,10)
-_x=6
-_y=50
-lblOpcode = QtBind.createLabel(gui,'Opcode:',_x,_y)
-txtOpcode = QtBind.createLineEdit(gui,"",_x+45,_y-3,32,20)
-lblData = QtBind.createLabel(gui,'Data:',_x+45+32+6,_y)
-txtData = QtBind.createLineEdit(gui,"",_x+45+32+6+32,_y-3,385,20)
-cbxEncrypted = QtBind.createCheckBox(gui, 'cbxEnc_clicked','Encrypted',_x+432,_y-20)
-_y+=25
-btnInjectClient = QtBind.createButton(gui,'btnInjectClient_clicked',"  CLIENTE ENJEKTE ET  ",_x+260,_y)
-btnInjectServer = QtBind.createButton(gui,'btnInjectServer_clicked',"  SERVERA ENJEKTE ET  ",_x+380,_y)
+lblInject = QtBind.createLabel(gui,'PAKET GÖRÜNTÜLEME PLUGINI..',6,10)
 # FILTRE
 _x=720-176
 _y=12
@@ -46,7 +36,7 @@ btnRemOpcode = QtBind.createButton(gui,'btnRemOpcode_clicked',"     SIL     ",_x
 lblNpcs = QtBind.createLabel(gui,"YAKINDAKI NPCLER :",6,85)
 btnNpcs = QtBind.createButton(gui,'btnNpcs_clicked',"  LISTEYI YENILE  ",6,202)
 lstNpcs = QtBind.createList(gui,6,101,400,100)
-lblLog = QtBind.createLabel(gui,"TrPacketTool:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.",6,230)
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 # ______________________________ METHODLAR ______________________________ #
 # CONFIG DOSYA YOLUNDAN DEVAM ET
 def getConfig():
@@ -81,6 +71,8 @@ def saveConfigs():
 	data['FILITRELE'] = lstOpcodesData
 	with open(getConfig(),"w") as f:
 		f.write(json.dumps(data, indent=4, sort_keys=True))
+def btnhakkinda_clicked():
+	log('\n\nTrPacketTool:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n    # BU PLUGIN CLIENTTEN SERVERA GONDERILEN OPCODE PAKETLERINI VEYA SERVERDAN CLIENTE GELEN OPCODE PAKETLERINI GOSTERMEKTEDIR.\n    # EK OLARAK CEVRENIZDEKI NPCLERIN DATALARINA ULASABILIRSINIZ.')
 # CLIENT PAKETLERINI GOSTER CHECKBOX KONTROLU
 def cbxShowClient_checked(checked):
 	global cbxShowClient
@@ -89,27 +81,6 @@ def cbxShowClient_checked(checked):
 def cbxShowServer_checked(checked):
 	global cbxShowServer
 	cbxShowServer = checked
-# BUTONA BASILDIGINDA PAKET ENKEKTE ET
-def btnInjectServer_clicked():
-	btnInjectPacket(inject_joymax)
-# BUTONA BASILDIGINDA PAKET ENKEKTE ET
-def btnInjectClient_clicked():
-	btnInjectPacket(inject_silkroad)
-def btnInjectPacket(IProxySend):
-	strOpcode = QtBind.text(gui,txtOpcode)
-	strData = QtBind.text(gui,txtData)
-	if strOpcode and strData:
-		data = bytearray()
-		opcode = int(strOpcode,16)
-		strData = strData.split()
-		i = 0
-		while i < len(data):
-			data.append(int(strData[i],16))
-			i += 1
-		encrypted = QtBind.isChecked(gui,cbxEncrypted)
-		log("Plugin: PAKET ENJEKTE EDILIYOR : "+(' (Encrypted)' if encrypted else '')+" :")
-		log("(Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ ("None" if not data else ' '.join('{:02X}'.format(x) for x in data)))
-		IProxySend(opcode,data,encrypted)
 # FILTRELEME CHECKBOX KONTROLU
 def cbxDontShow_clicked(checked):
 	cbxDontShow_editConfig(checked)
@@ -159,26 +130,6 @@ def CanShowPacket(opcode):
 		return True
 	return False
 # ______________________________ ETKINLIKLER ______________________________ #
-def inject(args):
-	argCount = len(args)
-	if argCount < 2:
-		log("Plugin: PAKET ENJEKSIYON YAPI HATASI")
-		return 0
-	opcode = int(args[1],16)
-	data = bytearray()
-	encrypted = False
-	dataIndex = 2
-	if argCount >= 3:
-		enc = args[2].lower()
-		if enc == 'true' or enc == 'false':
-			encrypted = enc == "true"
-			dataIndex +=1
-	for i in range(dataIndex, argCount):
-		data.append(int(args[i],16))
-	log("Plugin: Injecting packet"+(' (Encrypted)' if encrypted else '')+" :")
-	log("(Opcode) 0x" + '{:02X}'.format(opcode) + " (Data) "+ ("None" if not data else ' '.join('{:02X}'.format(x) for x in data)))
-	inject_joymax(opcode,data,encrypted)
-	return 0
 def handle_silkroad(opcode, data):
 	if cbxShowClient:
 		if CanShowPacket(opcode):
