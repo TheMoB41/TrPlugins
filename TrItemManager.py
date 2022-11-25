@@ -8,7 +8,7 @@ import struct
 import time
 import subprocess
 
-pVersion = '1.0.0'
+pVersion = '1.0.1'
 pName = 'TrItemManager'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrItemManager.py'
 
@@ -114,14 +114,11 @@ tbxplayer = QtBind.createLineEdit(gui_, "", _x + 385, _y + 110, 80, 18)
 lblparola = QtBind.createLabel(gui_, "SIFRE :", _x + 305, _y + 130)
 tbxparola = QtBind.createLineEdit(gui_, "", _x + 385, _y + 130, 80, 18)
 # SAVE / LOAD BUTON
-btnSaveConfig = QtBind.createButton(gui_, 'btnSaveConfig_clicked', "  KAYDET  ", _x + 305, _y + 155)
-btnLoadConfig = QtBind.createButton(gui_, 'btnLoadConfig_clicked', "  YUKLE  ", _x + 390, _y + 155)
+btnKaydet = QtBind.createButton(gui_, 'btnKaydet_clicked', "  KAYDET  ", _x + 305, _y + 155)
+btnYukle = QtBind.createButton(gui_, 'btnYukle_clicked', "  YUKLE  ", _x + 390, _y + 155)
 lblProfil = QtBind.createLabel(gui_, "CONFIG PROFIL ISMI :", _x + 305, _y + 182)
 tbxProfil = QtBind.createLineEdit(gui_, "", _x + 415, _y + 179, 110, 19)
-lblinfo = QtBind.createLabel(gui_,
-                             "TrItemManager:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.",
-                             _x + 305, _y + 205)
-
+btnhakkinda = QtBind.createButton(gui_,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 
 # ______________________________ MOTHODLAR ______________________________ #
 def getPath():
@@ -168,7 +165,7 @@ def saveConfigs(fileName=""):
         f.write(json.dumps(data, indent=4, sort_keys=True))
 
 
-def btnSaveConfig_clicked():
+def btnKaydet_clicked():
     strConfigName = QtBind.text(gui_, tbxProfil)
     saveConfigs(strConfigName)
     if strConfigName:
@@ -177,7 +174,7 @@ def btnSaveConfig_clicked():
         log("Plugin: KAYIT EDILDI..")
 
 
-def btnLoadConfig_clicked():
+def btnYukle_clicked():
     strConfigName = QtBind.text(gui_, tbxProfil)
     if loadConfigs(strConfigName):
         if strConfigName:
@@ -186,6 +183,9 @@ def btnLoadConfig_clicked():
             log("Plugin: YUKLENDI..")
     elif strConfigName:
         log("Plugin: [" + strConfigName + "] PROFILI BULUNAMADI.")
+
+def btnhakkinda_clicked():
+	log('\n\nTrItemManager:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n    # BU PLUGININ CIFT ISLEVI VARDIR.\n1. ISLEV:\n # PLUGIN UZERINDEN CHARINIZDA MEVCUT OLAN STONE, ELIXIR VE COINLERI GOREBILIRSINIZ.(ENVANTER - STORAGE - GUILD STORAGE)\n2.ISLEV:\n # PLUGINDE BELIRLEDIGINIZ MAIN CHAR,SIFRE VE DEGREE NUMARASI ILE DIGER CHARLARINIZDAKI STONE,ELIXIR VE COIN MIKTARLARINI PM OLARAK ALABILIRSINIZ.YAPMANIZ GEREKEN TEK SEY YAN CHARINIZI GORMEK ISTEDIGINIZ YERIN VE ITEMIN KODUNU YAZMAK..\n # YER KODLARI:\n i = ENVANTER | s = STORAGE | g = GUILD SORAGE\n # ITEM KODLARI:\n Stone | Elixir | Coin\n # ORNEK: STORAGEDEKI COIN MIKTARINI PM OLARAK ALMAK ICIN "sCoin" YAZILIR. ')
 
 
 def btnStorage_clicked():
