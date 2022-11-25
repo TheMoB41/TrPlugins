@@ -9,7 +9,7 @@ import os
 
 pName = 'TrGeriYükleyici'
 pUrl = ''
-pVersion = '1.0.0'
+pVersion = '1.0.1'
 
 path = get_config_dir() + 'Backup'
 gui = QtBind.init(__name__, pName)
@@ -25,6 +25,7 @@ txtChar = QtBind.createLineEdit(gui,"",470,48,120,20)
 lblServer = QtBind.createLabel(gui,'SERVER ADI :',400,80)
 txtServer = QtBind.createLineEdit(gui,"",470,78,120,20)
 btnLoadProfiles = QtBind.createButton(gui, 'button_load', ' PROFİLLERİ YÜKLE ', 470, 120)
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 def button_load():
 	global Loaded, Configs
 	Configs = {"Profiles": []}
@@ -61,6 +62,8 @@ def button_load():
 							Configs['Profiles'].append(data)
 	Loaded = True
 	AppendProfiles()
+def btnhakkinda_clicked():
+	log('\n\nTrGeriYükleyici:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n     # BU PLUGINE ILE CHARLARIN .JSON UZANTILI CONFIG DOSYALARINDA ZARAR MEYDANA GELDİĞİNDE DAHA ÖNCEDEN PHBOTUN KENDİ ALDIĞI YEDEK CONFIG DOSYASINDAN YÜKLEME YAPAR.')
 def button_restore():
 	SelectedProfile = QtBind.text(gui,lstProfiles)
 	SelectedDate = QtBind.text(gui,ProfileDates).split(' ')[0]
