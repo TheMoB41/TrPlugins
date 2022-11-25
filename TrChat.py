@@ -6,7 +6,7 @@ import json
 import os
 
 pName = 'TrChat'
-pVersion = '1.0.0'
+pVersion = '1.0.1'
 pUrl = "https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrChat.py"
 # ______________________________ KURULUM ______________________________ #
 # KURESELLER
@@ -41,6 +41,7 @@ cbxEvtChar_died = QtBind.createCheckBox(gui,'cbxLog_clicked','KARAKTER OLDUGUNDE
 cbxEvtPet_transport_died = QtBind.createCheckBox(gui,'cbxLog_clicked','TRANSPORT/PET OLDUGUNDE',321,159)
 cbxEvtDrop_item = QtBind.createCheckBox(gui,'cbxLog_clicked','ITEM DUSTUGUNDE',321,178)
 cbxEvtDrop_rare = QtBind.createCheckBox(gui,'cbxLog_clicked','SOX DUSTUGUNDE',321,197)
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 # ______________________________ METHODLAR ______________________________ #
 # CONFIGDEN DEVAM ET
 def getPath():
@@ -145,6 +146,8 @@ def saveConfigs():
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
 		log("Plugin: "+pName+" CONFIG KAYDEDILDI..")
+def btnhakkinda_clicked():
+	log('\n\nTrChat:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n   # BU PLUGIN ILE 10 SANIYEDE BIR SPAM MESAJ ATILABILIR, SECILEN KOSULA GORE ISTEDIGINIZ CHAT EKRANINA MESAJ GONDEREBILIRSINIZ.\n   # BUNA EK OLARAK SCRIPTE EKLEYECEGINIZ BASIT BIR KODLA SCRIPT ESNASINDA OTO MESAJ ATTIRABILIRSINIZ..\n   # ORNEK: "chat,all,SELAM" VEYA "chat,private,TheMoB,SELAM"')
 # CHAR OYUNDAMI KONTROL ET
 def isJoined():
 	global character_data
