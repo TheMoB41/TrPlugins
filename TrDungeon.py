@@ -7,7 +7,7 @@ import json
 import struct
 import os
 
-pVersion = '1.0.1'
+pVersion = '2.0.0'
 pName = 'TrDungeon'
 pUrl = 'https://raw.githubusercontent.com/TheMoB41/TrPlugins/main/TrDungeon.py'
 
@@ -76,9 +76,7 @@ lblGiantParty = QtBind.createLabel(gui,'GiantParty (20)',215,_y)
 cbxIgnoreGiantParty = QtBind.createCheckBox(gui,'cbxIgnoreGiantParty_clicked','GORMEZDEN GEL',320,_y)
 cbxOnlyCountGiantParty = QtBind.createCheckBox(gui,'cbxOnlyCountGiantParty_clicked','SADECE SAY',425,_y)
 _y+=30
-cbxAcceptForgottenWorld = QtBind.createCheckBox(gui,'cbxAcceptForgottenWorld_checked','FGW DAVETLERINI KABUL ET',240,_y)
-QtBind.createLabel(gui,'TrDungeon:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.',240,_y+20)
-
+btnhakkinda = QtBind.createButton(gui,'btnhakkinda_clicked',"         HAKKINDA         ",610,290)
 # ______________________________ METHODLAR ______________________________ #
 def cbxIgnoreGeneral_clicked(checked):
 	Checkbox_Checked(checked,"lstIgnore",0) # 0 = General
@@ -120,8 +118,6 @@ def cbxIgnoreGiantParty_clicked(checked):
 	Checkbox_Checked(checked,"lstIgnore",20) # 20 = GiantParty
 def cbxOnlyCountGiantParty_clicked(checked):
 	Checkbox_Checked(checked,"lstOnlyCount",20)
-def cbxAcceptForgottenWorld_checked(checked):
-	saveConfigs()
 # CHECKBOXLARI GENELLESTIRME METHODU
 def Checkbox_Checked(checked,gListName,mobType):
 	gListReference = globals()[gListName]
@@ -164,7 +160,6 @@ def loadDefaultConfig():
 	QtBind.setChecked(gui,cbxOnlyCountParty,False)
 	QtBind.setChecked(gui,cbxOnlyCountChampionParty,False)
 	QtBind.setChecked(gui,cbxOnlyCountGiantParty,False)
-	QtBind.setChecked(gui,cbxAcceptForgottenWorld,False)
 # YUKLENEBILIR CONFIG VARSA YUKLE
 def loadConfigs():
 	loadDefaultConfig()
@@ -229,8 +224,6 @@ def loadConfigs():
 				else:
 					continue
 				lstOnlyCount.append(t)
-		if 'Accept ForgottenWorld' in data and data['Accept ForgottenWorld']:
-			QtBind.setChecked(gui,cbxAcceptForgottenWorld,True)
 # TUM CONFIGI KAYDET
 def saveConfigs():
 	if isJoined():
@@ -238,9 +231,10 @@ def saveConfigs():
 		data['OnlyCount Types'] = lstOnlyCount
 		data['Ignore Types'] = lstIgnore
 		data['Ignore Names'] = lstMobsData
-		data['Accept ForgottenWorld'] = QtBind.isChecked(gui,cbxAcceptForgottenWorld)
 		with open(getConfig(),"w") as f:
 			f.write(json.dumps(data, indent=4, sort_keys=True))
+def btnhakkinda_clicked():
+	log('\n\nTrDungeon:\n * TheMoB TARAFINDAN DUZENLENMISTIR. \n * FEEDBACK SISTEMLI BIR YAZILIMDIR. \n * HATA VE ONERI BILDIRIMLERINIZI BANA ULASTIRABILIRSINIZ.\n\n    # BU PLUGIN ILE FORGOTTEN WORLD - HOLW WATER TEMPLE GIBI DUNGEONLARI SCRIPTE EKLENEN KOMUT SAYESINDE OTO YAPTIRABILIRSINIZ.\nKOMUT:\n "AtackArea,x,y"\n # x = RANGE (YAZILMAZSA VARSAYILAN = 75)\n # y = YENIDEN CANAVAR TANIMLAMA SURESI (SANIYE)\n')
 # CHAR OYUNDA MI KONTROL ET
 def isJoined():
 	global character_data
@@ -346,67 +340,6 @@ def WaitPickableDrops(filterCursor,waiting=0):
 			log('Plugin: ITEMIN ALINMASI ICIN BEKLENIYOR : "'+drop['name']+'"...')
 			sleep(1.0)
 			WaitPickableDrops(filterCursor,waiting+1)
-
-def GetDimensionalHole(Name):
-	searchByName = Name != ''
-	items = get_inventory()['items']
-	for slot, item in enumerate(items):
-		if item:
-			match = False
-			if searchByName:
-				match = (Name == item['name'])
-			else:
-				itemData = get_item(item['model'])
-				match = (itemData['tid1'] == 3 and itemData['tid2'] == 12 and itemData['tid3'] == 7)
-
-			if match:
-				item['slot'] = slot
-				return item
-	return None
-def GetDimensionalPillarUID(Name):
-	# Load all talking objects around
-	npcs = get_npcs()
-	if npcs:
-		for uid, npc in npcs.items():
-			item = get_item(npc['model'])
-			if item and item['name'] == Name:
-				return uid
-	return 0
-def EnterToDimensional(Name):
-	uid = GetDimensionalPillarUID(Name)
-	if uid:
-		log('Plugin: DMH SECILIYOR..')
-		packet = struct.pack('I',uid)
-		inject_joymax(0x7045,packet,False)
-		sleep(1.0)
-		log('Plugin: FGW GIRILIYOR..')
-		inject_joymax(0x704B,packet,False)
-		packet += struct.pack('H',3)
-		inject_joymax(0x705A,packet,False)
-		Timer(5.0,start_bot).start()
-		return
-	log('Plugin: "'+Name+'" ETRAFINDA BULUNAMADI..!')
-
-def GoDimensionalThread(Name):
-	if dimensionalItemActivated:
-		Name = dimensionalItemActivated['name']
-		log('Plugin: '+( '"'+Name+'"' if Name else 'Dimensional Hole')+' HALEN ACIK!')
-		EnterToDimensional(Name)
-		return
-	item = GetDimensionalHole(Name)
-	if item:
-		log('Plugin: KULLANIYOR: "'+item['name']+'"...')
-		p = struct.pack('B',item['slot'])
-		locale = get_locale()
-		if locale == 22 or locale == 18: # 
-			p += b'\x30\x0C\x0C\x07'
-		else:
-			p += b'\x6C\x3E'
-		global itemUsedByPlugin
-		itemUsedByPlugin = item
-		inject_joymax(0x704C,p,True)
-	else:
-		log('Plugin: '+( '"'+Name+'"' if Name else 'Dimensional Hole')+' ENVANTERDE BULUNAMADI!')
 # ______________________________ ETKINLIKLER ______________________________ #
 def AttackArea(args):
 	radius = None
@@ -427,41 +360,8 @@ def AttackArea(args):
 	else:
 		log("Plugin: ALANDA MOB BULUNAMADI. Radius: "+(str(radius) if radius != None else "Max."))
 	return 0
-def GoDimensional(args):
-	stop_bot()
-	name = ''
-	if len(args) > 1:
-		name = args[1]
-	Timer(0.001,GoDimensionalThread,[name]).start()
-	return 0
 def joined_game():
 	loadConfigs()
-def handle_joymax(opcode, data):
-	# SERVER_DIMENSIONAL_INVITATION_REQUEST
-	if opcode == 0x751A:
-		if QtBind.isChecked(gui,cbxAcceptForgottenWorld):
-			packet = data[:4] # Request ID
-			packet += b'\x00\x00\x00\x00' # unknown ID
-			packet += b'\x01' # Accept flag
-			inject_joymax(0x751C,packet,False)
-			log('Plugin: FGW KATILIMI KABUL EDILDI..!')
-	# SERVER_INVENTORY_ITEM_USE
-	elif opcode == 0xB04C:
-		global itemUsedByPlugin
-		if itemUsedByPlugin:
-			if data[0] == 1:
-				log('Plugin: "'+itemUsedByPlugin['name']+'" ACILDI')
-				global dimensionalItemActivated
-				dimensionalItemActivated = itemUsedByPlugin
-				def DimensionalCooldown():
-					global dimensionalItemActivated
-					dimensionalItemActivated = None
-				Timer(DIMENSIONAL_COOLDOWN_DELAY,DimensionalCooldown).start()
-				Timer(1.0,EnterToDimensional,[itemUsedByPlugin['name']]).start()
-			else:
-				log('Plugin: "'+itemUsedByPlugin['name']+'" ACILAMIYOR')
-			itemUsedByPlugin = None
-	return True
 # PLUGIN YUKLENDI
 log('Plugin: '+pName+' v'+pVersion+' BASARIYLA YUKLENDI')
 
